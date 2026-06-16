@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Hello",
   "main": "index.js",
+  "types": "commonjs",
   "scripts": {
+    "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,7 +22,9 @@
   "homepage": "https://github.com/YounesBenaggoun/Rattrapage#readme",
   "dependencies": {
     "cors": "^2.8.6",
-    "express": "^5.2.1"
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.7.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
