@@ -1,17 +1,29 @@
-const express = require("express");
+import express from "express";
+
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
+
+import User from "../Models/user.model.js"
+
 const router = express.Router();
-const User = require("../models/user.model.js");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+
+
+
+
+
+
+
 
 
 
 router.post("/register", async (req, res) => {
+    console.log(req.body);
     try {
         const { email, password, name } = req.body;
 
-        if (!email || !password || !name) {
-            return res.status(400).json({ message: "Email and password and Name are required" });
+        if (!email || !password) {
+            return res.status(400).json({ message: "Email and password are required" });
         }
 
         let user = await User.findOne({ email })
@@ -20,6 +32,7 @@ router.post("/register", async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
+
 
         const newUser = new User({
             email,
@@ -77,7 +90,7 @@ router.post("/signin", async (req, res) => {
             );
             return res.status(201).json({ message: "register succes", user, token })
         } else {
-            return res.status(400).json({ message: "passwrod or email donn't match" })
+            return res.status(400).json({ message: "passwrod or email don't match" })
         }
     } catch (error) {
         return res.status(500).json({ message: error.message })
@@ -86,7 +99,7 @@ router.post("/signin", async (req, res) => {
 })
 
 router.get("/:id", async (req, res) => {
-    // const user = await User.findOne({"_id": req.params.id});
+    // const user = await User.findOne({ "_id": req.params.id });
     const user = await User.findById(req.params.id);
     if (!user) {
         return res.status(404).json({ message: "user dont exist" })
@@ -96,4 +109,5 @@ router.get("/:id", async (req, res) => {
 
 })
 
-module.exports = router;
+
+export default router;
