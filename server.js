@@ -1,17 +1,22 @@
 const express = require("express");
-const app = express();
-
-
 const cors = require("cors");
 const dotenv = require("dotenv").config();
+const connectDB = require("./config/db.js");
+
+const userRoute = require("./routes/user.route.js");
+
+
+const app = express();
 
 const PORT = process.env.PORT;
 
 
-const connectDB = require("./config/db.js")();
+
+
 
 app.use(express.json());
 app.use(cors());
+app.use("/User", userRoute);
 
 
 
@@ -19,3 +24,6 @@ app.use(cors());
 app.listen(PORT, () => {
     console.log("Server Listen on ", PORT)
 })
+
+
+connectDB();
