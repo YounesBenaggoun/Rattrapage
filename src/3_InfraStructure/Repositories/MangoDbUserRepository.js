@@ -11,7 +11,7 @@ class UserRepositoryMongoDb extends UserInterface {
         super();
     }
     async findByEmail(email) {
-        const userExist = await User.findOne({ email });
+        const userExist = await User.findOne({ email }).collation({ locale: "en", strength: 2 });
         if (userExist) {
             return userExist;
         }

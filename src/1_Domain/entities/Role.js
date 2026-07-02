@@ -2,9 +2,9 @@
 
 
 const Role = Object.freeze({
-    ADMIN: 'admin',
+    ORGANIZER: 'organizer',
     EXPOSER: 'exposer',
-    USER: 'user',
+    VISITOR: 'visitor',
 });
 
 const ALL_ROLES = Object.values(Role);

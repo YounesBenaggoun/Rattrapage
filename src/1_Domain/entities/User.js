@@ -2,7 +2,7 @@ const { isValidRole, Role } = require('./Role');
 
 
 class User {
-    constructor({ id, name, email, password, role = Role.USER }) {
+    constructor({ id, name, email, password, role = Role.VISITOR }) {
         this.id = id;
         this.name = name;
         this.email = email;
