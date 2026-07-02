@@ -10,6 +10,7 @@ class UserRepositoryMongoDb extends UserInterface {
     constructor() {
         super();
     }
+    
     async findByEmail(email) {
         const userExist = await User.findOne({ email }).collation({ locale: "en", strength: 2 });
         if (userExist) {
@@ -27,6 +28,7 @@ class UserRepositoryMongoDb extends UserInterface {
         })
         return newUser;
     }
+
     async findAll(req, res) {
         const list = await User.find();
         return list;
