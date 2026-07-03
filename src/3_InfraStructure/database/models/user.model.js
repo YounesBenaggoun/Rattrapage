@@ -7,14 +7,17 @@ const schema = new mongoose.Schema({
         type: String,
         require: true,
         unique: true,
+        trim: true,
         required: true
     },
 
     password: {
         type: String,
+        trim: true,
         required: true
     },
     role: {
+        trim: true,
         type: String
     }
 })

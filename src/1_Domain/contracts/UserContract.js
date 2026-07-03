@@ -1,4 +1,4 @@
-// Act as a structural contract (Interface simulation in JavaScript)
+
 class UserContract {
     async save(user) { throw new Error('ERROR :  SAVE_METHOD_NOT_IMPLEMENTED'); }
     async findByEmail(email) { throw new Error('ERROR :  FindByEmail_METHOD_NOT_IMPLEMENTED'); }

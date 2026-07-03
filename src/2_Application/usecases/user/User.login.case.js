@@ -1,7 +1,3 @@
-
-
-
-
 class UserLogin {
     constructor(userRepository, passwordHasher, tokenService) {
         this.userRepository = userRepository;
@@ -18,6 +14,7 @@ class UserLogin {
             error.statusCode = 401;
             throw error;
         }
+
         const match = await this.passwordHasher.compare(password, existingUser.password);
         if (!match) {
             const error = new Error('Invalid email or password');
@@ -25,20 +22,16 @@ class UserLogin {
             throw error;
         }
 
-
         const token = this.tokenService.generateToken({
             id: existingUser.id,
             email,
             role: existingUser.role
         })
 
-
-
         return {
             user: existingUser,
             token
         }
-
     }
 }
 

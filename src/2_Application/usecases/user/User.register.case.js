@@ -28,7 +28,6 @@ class RegisterUser {
             role: newUser.role
         })
 
-
         return {
             token,
             user: newUser
