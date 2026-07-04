@@ -14,7 +14,7 @@ const expositionAdd = new ExpositionAdd(new ExpositionRepository);
 exports.add = async (req, res, next) => {
     try {
         const result = await expositionAdd.execute(req.body);
-        console.log(req.body);
+       
         // const result = await service.registerUser.execute(req.body);
         res.status(201).json(result);
     } catch (error) {

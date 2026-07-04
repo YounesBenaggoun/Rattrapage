@@ -8,22 +8,11 @@ const authMiddleware = require("../middlewares/authMiddleware");
 const roleMiddleware = require("../middlewares/roleMiddleware");
 
 
-
-
-
-
-
 router.post(
     "/add", 
     authMiddleware, 
     roleMiddleware(Role.VISITOR), 
     expositionController.add
 );
-
-
-
-
-
-
 
 module.exports = router;
