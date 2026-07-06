@@ -1,10 +1,9 @@
 
 require('dotenv').config();
-// jest.setTimeout(30000);
+
 
 const request = require("supertest");
 const app = require("../src/app.js");
-
 const mongoose = require("mongoose");
 
 beforeAll(async () => {
@@ -17,6 +16,49 @@ afterAll(async () => {
 
 
 
+
+describe("Authentication", () => {
+    let organizerToken;
+    let exposerToken;
+    let visitorToken;
+    test("ORGANIZER login", async () => {
+        const res = await request(app)
+            .post("/user/login")
+            .send({
+                email: "younes.benaggoun3@gmail.com",
+                password: "12341234",
+            });
+        expect(res.statusCode).toBe(200);
+        expect(res.body.user.role).toBe("organizer");
+
+        organizerToken = res.body.token;
+    });
+    test("Exposer login", async () => {
+        const res = await request(app)
+            .post("/user/login")
+            .send({
+                email: "exposer@gmail.com",
+                password: "12341234",
+            });
+        expect(res.statusCode).toBe(200);
+        expect(res.body.user.role).toBe("exposer");
+
+        exposerToken = res.body.token;
+    });
+    test("Visitor login", async () => {
+        const res = await request(app)
+            .post("/user/login")
+            .send({
+                email: "visitor@gmail.com",
+                password: "12341234",
+            });
+        expect(res.statusCode).toBe(200);
+        expect(res.body.user.role).toBe("visitor");
+
+        visitorToken = res.body.token;
+    });
+
+});
 
 
 describe("Express API", () => {
