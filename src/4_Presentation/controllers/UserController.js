@@ -18,17 +18,16 @@ const tokenService = new JwtService(JWT_SECRET);
 
 const service = new UserService(repository, passwordHasher, tokenService);
 
-const getAll = async (req, res, next) => {
+const getAll = async (req, res) => {
     try {
         const users = await service.getUsers.execute();
         res.status(200).json(users);
     } catch (error) {
         res.status(500).json({ message: error.message });
-        next(error);
     }
 };
 
-const register = async (req, res, next) => {
+const register = async (req, res) => {
     try {
         const result = await service.registerUser.execute(req.body);
         res.status(201).json(result);
@@ -36,7 +35,6 @@ const register = async (req, res, next) => {
         res.status(500).json({
             message: error.message
         });
-        next(error);
     }
 };
 

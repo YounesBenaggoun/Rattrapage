@@ -43,7 +43,6 @@ describe("Authentication", () => {
                 email: "younes.benaggoun3@gmail.com",
                 password: "12341234",
             });
-        console.log(response.body);
         expect(response.status).toBe(200);
         expect(response.body).toHaveProperty("token");
     });
