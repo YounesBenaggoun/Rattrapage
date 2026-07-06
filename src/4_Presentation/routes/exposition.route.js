@@ -15,4 +15,11 @@ router.post(
     expositionController.add
 );
 
+router.get(
+    "/",
+    authMiddleware,
+    roleMiddleware(Role.ORGANIZER),
+    expositionController.getAll
+);
+
 module.exports = router;

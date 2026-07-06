@@ -57,6 +57,20 @@ describe("Authentication", () => {
 
         visitorToken = res.body.token;
     });
+    test("Organizer can access organizer route", async () => {
+        const res = await request(app)
+            .get("/exposition")
+            .set("Authorization", `Bearer ${organizerToken}`);
+
+        expect(res.statusCode).toBe(200);
+    });
+    test("Visitor can't access organizer route", async () => {
+        const res = await request(app)
+            .get("/exposition")
+            .set("Authorization", `Bearer ${visitorToken}`);
+
+        expect(res.statusCode).toBe(401);
+    });
 
 });
 

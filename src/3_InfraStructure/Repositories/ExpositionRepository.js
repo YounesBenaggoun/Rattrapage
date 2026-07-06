@@ -14,6 +14,11 @@ class ExpositionRepository extends ExpositionContract {
         const newExposition = await Exposition.create(exposition)
         return newExposition;
     }
+    async getAll() {
+        
+        const expositionList = await Exposition.find();
+        return expositionList;
+    }
 
 
 }

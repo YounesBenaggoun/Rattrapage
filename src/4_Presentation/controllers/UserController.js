@@ -25,7 +25,7 @@ const service = new UserService(repository, passwordHasher, tokenService);
 exports.getAll = async (req, res, next) => {
     try {
         const users = await service.getUsers.execute();
-        res.status(201).json(users);
+        res.status(200).json(users);
     } catch (error) {
         res.status(500).json({ message: error.message })
         next(error)
