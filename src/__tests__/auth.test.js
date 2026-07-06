@@ -34,9 +34,7 @@ describe("Authentication", () => {
             });
         expect(res.status).toBe(200);
         expect(res.body.user.role).toBe("organizer");
-
         organizerToken = res.body.token;
-
     });
     test("Exposer login", async () => {
         const res = await request(app)
@@ -47,7 +45,6 @@ describe("Authentication", () => {
             });
         expect(res.statusCode).toBe(200);
         expect(res.body.user.role).toBe("exposer");
-
         exposerToken = res.body.token;
     });
     test("Visitor login", async () => {
@@ -59,7 +56,6 @@ describe("Authentication", () => {
             });
         expect(res.statusCode).toBe(200);
         expect(res.body.user.role).toBe("visitor");
-
         visitorToken = res.body.token;
     });
     test("Organizer can access organizer route", async () => {
@@ -77,5 +73,4 @@ describe("Authentication", () => {
 
         expect(res.statusCode).toBe(401);
     });
-
 });
