@@ -1,4 +1,5 @@
 PORT=5000
 MONGO_URI = mongodb+srv://Younes:12341234@cluster0.3684pxb.mongodb.net/Rattrapage
 JWT_SECRET = JWT-SECRET
-SALT = 10
+SALT_ROUNDS = 10
+JWT_EXPIRES_IN = 180d

@@ -10,9 +10,7 @@ class RegisterUser {
     async execute({ name, email, password, role }) {
         const existingUser = await this.userRepository.findByEmail(email);
         if (existingUser) {
-            const error = new Error('A user with this email already exists');
-            error.statusCode = 409;
-            throw error;
+            throw new Error('A user with this email already exists');
         }
         const hashedPassword = await this.passwordHasher.hash(password);
         const user = new User({

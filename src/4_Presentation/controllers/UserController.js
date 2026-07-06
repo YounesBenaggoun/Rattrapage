@@ -1,10 +1,16 @@
+
+
 import UserService from "../../2_Application/services/UserService.js";
 import UserRepository from "../../3_InfraStructure/Repositories/MangoDbUserRepository.js";
 import PasswordHasher from "../../3_InfraStructure/security/bcrypt.js";
 import JwtService from "../../3_InfraStructure/security/jwtService.js";
 
-const SALT_ROUNDS = Number(process.env.SALT_ROUNDS);
-const JWT_SECRET = process.env.JWT_SECRET;
+import Config from "../../config/env.js"
+
+
+
+const SALT_ROUNDS = Config.SALT_ROUNDS;
+const JWT_SECRET = Config.JWT_SECRET;
 
 const passwordHasher = new PasswordHasher(SALT_ROUNDS);
 const repository = new UserRepository();
@@ -27,7 +33,9 @@ const register = async (req, res, next) => {
         const result = await service.registerUser.execute(req.body);
         res.status(201).json(result);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({
+            message: error.message
+        });
         next(error);
     }
 };
