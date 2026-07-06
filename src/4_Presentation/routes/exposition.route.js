@@ -9,9 +9,9 @@ const roleMiddleware = require("../middlewares/roleMiddleware");
 
 
 router.post(
-    "/add", 
-    authMiddleware, 
-    roleMiddleware(Role.VISITOR), 
+    "/add",
+    authMiddleware,
+    roleMiddleware(Role.ORGANIZER),
     expositionController.add
 );
 

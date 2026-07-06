@@ -9,12 +9,12 @@ const JwtService = require("../../3_InfraStructure/security/jwtService");
 
 
 
-const SALT = 10;
-const JWT_SECRET = "jwt_secret"
+const SALT_ROUNDS = Number(process.env.SALT_ROUNDS);
+const JWT_SECRET = process.env.JWT_SECRET;
 
-const passwordHasher = new PasswordHasher(SALT);
+const passwordHasher = new PasswordHasher(SALT_ROUNDS);
 const repository = new UserRepository();
-const tokenService = new JwtService("jwt_secret");
+const tokenService = new JwtService(JWT_SECRET);
 
 const service = new UserService(repository, passwordHasher, tokenService);
 
