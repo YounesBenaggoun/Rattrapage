@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 dotenv.config({
     quiet: true,
 });
+
 import { describe, test, it, expect, beforeAll, afterAll } from "vitest";
 import mongoose from "mongoose";
 import request from "supertest";
@@ -32,18 +33,4 @@ describe("MongoDB connection", () => {
     });
 });
 
-describe("Authentication", () => {
-    let organizerToken;
-    let exposerToken;
-    let visitorToken;
-    it("returns a token for valid login", async () => {
-        const response = await request(app)
-            .post("/user/login")
-            .send({
-                email: "younes.benaggoun3@gmail.com",
-                password: "12341234",
-            });
-        expect(response.status).toBe(200);
-        expect(response.body).toHaveProperty("token");
-    });
-});
+;

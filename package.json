@@ -6,7 +6,7 @@
   "types": "module",
   "scripts": {
     "dev": "nodemon src/server.js",
-    "test": "vitest run",
+    "test": "npx vitest --reporter verbose",
     "test:watch": "vitest"
   },
   "repository": {
