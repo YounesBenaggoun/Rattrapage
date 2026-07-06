@@ -38,7 +38,7 @@ describe("Authentication", () => {
     let visitorToken;
     it("returns a token for valid login", async () => {
         const response = await request(app)
-            .post("/login")
+            .post("/user/login")
             .send({
                 email: "younes.benaggoun3@gmail.com",
                 password: "12341234",
