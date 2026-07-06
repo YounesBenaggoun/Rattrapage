@@ -3,8 +3,10 @@
 
 import Config from "./config/env.js";
 
+const MONGO_URI = process.env.MONGO_URI;
+
 import ConnectMongDB from "./3_InfraStructure/config/mongoConnect.js";
-ConnectMongDB();
+ConnectMongDB(MONGO_URI);
 
 import app from "./app.js";
 

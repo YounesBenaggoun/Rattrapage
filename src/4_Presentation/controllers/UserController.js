@@ -32,13 +32,12 @@ const register = async (req, res, next) => {
     }
 };
 
-const login = async (req, res, next) => {
+const login = async (req, res) => {
     try {
         const result = await service.loginUser.execute(req.body);
         res.status(200).json(result);
     } catch (error) {
         res.status(500).json({ message: error.message });
-        next(error);
     }
 };
 
