@@ -1,5 +1,4 @@
-const { isValidRole, Role } = require('./Role');
-
+import { isValidRole, Role } from "./Role.js";
 
 class User {
     constructor({ id, name, email, password, role = Role.VISITOR }) {
@@ -13,18 +12,21 @@ class User {
 
     validate() {
         if (!this.email || !User.isValidEmail(this.email)) {
-            throw new Error('Invalid email address');
+            throw new Error("Invalid email address");
         }
+
         if (!this.name || this.name.trim().length === 0) {
-            throw new Error('Name cannot be empty');
+            throw new Error("Name cannot be empty");
         }
+
         if (!isValidRole(this.role)) {
             throw new Error(`Invalid role: ${this.role}`);
         }
     }
+
     static isValidEmail(email) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     }
 }
 
-module.exports = User;
+export default User;

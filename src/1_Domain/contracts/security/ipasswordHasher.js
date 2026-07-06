@@ -9,4 +9,4 @@ class IPasswordHasher {
     }
 }
 
-module.exports = IPasswordHasher;
+export default IPasswordHasher;

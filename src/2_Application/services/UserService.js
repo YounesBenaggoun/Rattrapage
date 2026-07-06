@@ -1,7 +1,6 @@
-const GetUsers = require("../usecases/user/User.getAll.case");
-const RegisterUser = require("../usecases/user/User.register.case");
-const LoginUser = require("../usecases/user/User.login.case");
-
+import GetUsers from "../usecases/user/User.getAll.case.js";
+import RegisterUser from "../usecases/user/User.register.case.js";
+import LoginUser from "../usecases/user/User.login.case.js";
 
 class UserService {
     constructor(repository, passwordHasher, tokenService) {
@@ -11,4 +10,4 @@ class UserService {
     }
 }
 
-module.exports = UserService;
+export default UserService;

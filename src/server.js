@@ -1,20 +1,16 @@
 
 
 
-const Config = require("./config/env.js");
+import Config from "./config/env.js";
 
-const ConnectMongDB = require("./3_InfraStructure/config/mongoConnect");
+import ConnectMongDB from "./3_InfraStructure/config/mongoConnect.js";
 ConnectMongDB();
 
-
-const app = require("./app.js");
-
-
+import app from "./app.js";
 
 app.listen(Config.PORT, () => {
     console.log(`Server running on port ${Config.PORT}`);
 });
-
 
 
 

@@ -1,18 +1,11 @@
-const express = require("express");
-const router = express.Router();
-
-
-
+import express from "express";
+import userRouter from "./4_Presentation/routes/user.route.js";
+import expositionRouter from "./4_Presentation/routes/exposition.route.js";
 
 const app = express();
 
-
-
 app.use(express.json());
-app.use("/user", require("./4_Presentation/routes/user.route"));
-app.use("/exposition", require("./4_Presentation/routes/exposition.route"));
+app.use("/user", userRouter);
+app.use("/exposition", expositionRouter);
 
-
-
-module.exports = app;
-
+export default app;

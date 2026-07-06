@@ -5,4 +5,4 @@ class UserContract {
     async findAll() { throw new Error('ERROR : Method FindAll not emplemented') }
 }
 
-module.exports = UserContract;
+export default UserContract;

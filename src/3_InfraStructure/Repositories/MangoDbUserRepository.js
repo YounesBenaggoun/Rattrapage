@@ -1,18 +1,17 @@
-const UserInterface = require('../../1_Domain/contracts/UserContract');
-
-
-const User = require("../database/models/user.model");
-
-
-
+import UserInterface from "../../1_Domain/contracts/UserContract.js";
+import User from "../database/models/user.model.js";
 
 class UserRepositoryMongoDb extends UserInterface {
     constructor() {
         super();
     }
-    
+
     async findByEmail(email) {
-        const userExist = await User.findOne({ email }).collation({ locale: "en", strength: 2 });
+        const userExist = await User.findOne({ email }).collation({
+            locale: "en",
+            strength: 2
+        });
+
         if (userExist) {
             return userExist;
         }
@@ -25,15 +24,15 @@ class UserRepositoryMongoDb extends UserInterface {
             name: user.name,
             password: user.password,
             role: user.role
-        })
+        });
+
         return newUser;
     }
 
-    async findAll(req, res) {
+    async findAll() {
         const list = await User.find();
         return list;
     }
 }
 
-
-module.exports = UserRepositoryMongoDb;
+export default UserRepositoryMongoDb;

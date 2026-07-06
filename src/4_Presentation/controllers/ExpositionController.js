@@ -1,35 +1,34 @@
+import ExpositionRepository from "../../3_InfraStructure/Repositories/ExpositionRepository.js";
 
+import ExpositionAdd from "../../2_Application/usecases/Exposition/Exposition.Add.case.js";
+import ExpositionGetAll from "../../2_Application/usecases/Exposition/Exposition.getAll.case.js";
 
+const repository = new ExpositionRepository();
 
+const expositionAdd = new ExpositionAdd(repository);
+const expositionGetAll = new ExpositionGetAll(repository);
 
-
-
-const ExpositionRepository = require("../../3_InfraStructure/Repositories/ExpositionRepository");
-
-const ExpositionAdd = require("../../2_Application/usecases/Exposition/Exposition.Add.case");
-const ExpositionGetAll = require("../../2_Application/usecases/Exposition/Exposition.getAll.case");
-
-
-const expositionAdd = new ExpositionAdd(new ExpositionRepository);
-const expositionGetAll = new ExpositionGetAll(new ExpositionRepository);
-
-exports.add = async (req, res, next) => {
+const add = async (req, res) => {
     try {
         const result = await expositionAdd.execute(req.body);
-        res.status(201).json(result);
+        return res.status(201).json(result);
     } catch (error) {
-        res.status(500).json({ message: error.message })
+        return res.status(500).json({ message: error.message });
     }
-}
-exports.getAll = async (req, res, next) => {
+};
 
+const getAll = async (req, res) => {
     try {
         const result = await expositionGetAll.execute();
-        res.status(200).json(result);
+        return res.status(200).json(result);
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             source: "Exposition controller",
-            message: error.message
-        })
+            message: error.message,
+        });
     }
+};
+export default {
+    add, 
+    getAll
 }

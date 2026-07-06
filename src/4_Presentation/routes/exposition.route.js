@@ -1,12 +1,12 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const { Role } = require("../../1_Domain/entities/Role");
 
-const expositionController = require("../controllers/ExpositionController");
+import { Role } from "../../1_Domain/entities/Role.js";
 
-const authMiddleware = require("../middlewares/authMiddleware");
-const roleMiddleware = require("../middlewares/roleMiddleware");
+import expositionController from "../controllers/ExpositionController.js";
 
+import authMiddleware from "../middlewares/authMiddleware.js";
+import roleMiddleware from "../middlewares/roleMiddleware.js";
 
 router.post(
     "/add",
@@ -22,4 +22,4 @@ router.get(
     expositionController.getAll
 );
 
-module.exports = router;
+export default router;

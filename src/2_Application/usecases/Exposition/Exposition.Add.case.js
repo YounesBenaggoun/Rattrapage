@@ -1,11 +1,10 @@
-const Exposition = require("../../../1_Domain/entities/Exposition");
-
-
+import Exposition from "../../../1_Domain/entities/Exposition.js";
 
 class ExpositionAdd {
     constructor(expositionRepository) {
         this.expositionRepository = expositionRepository;
     }
+
     async execute({
         id,
         title,
@@ -26,11 +25,12 @@ class ExpositionAdd {
             maxVisitor,
             maxExposer,
             startTime,
-            endTime
-        })
+            endTime,
+        });
+
         const newExposition = await this.expositionRepository.save(exposition);
         return newExposition;
     }
 }
 
-module.exports = ExpositionAdd;
+export default ExpositionAdd;

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const expositionSchema = new mongoose.Schema({
   title: {
@@ -46,4 +46,6 @@ const expositionSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Exposition", expositionSchema);
+const Exposition = mongoose.model("Exposition", expositionSchema);
+
+export default Exposition;

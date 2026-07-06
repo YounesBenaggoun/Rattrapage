@@ -22,4 +22,4 @@ class Exposition {
     }
 }
 
-module.exports = Exposition;
+export default Exposition;

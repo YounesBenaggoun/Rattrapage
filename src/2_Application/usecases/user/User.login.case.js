@@ -35,4 +35,4 @@ class UserLogin {
     }
 }
 
-module.exports = UserLogin;
+export default UserLogin

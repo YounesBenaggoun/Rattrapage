@@ -1,7 +1,7 @@
-const User = require("../../../1_Domain/entities/User");
+import User from "../../../1_Domain/entities/User.js";
 
 class RegisterUser {
-    constructor(userRepository, passwordHasher,tokenService ) {
+    constructor(userRepository, passwordHasher, tokenService) {
         this.userRepository = userRepository;
         this.passwordHasher = passwordHasher;
         this.tokenService = tokenService;
@@ -34,4 +34,4 @@ class RegisterUser {
         }
     }
 }
-module.exports = RegisterUser;
+export default RegisterUser;

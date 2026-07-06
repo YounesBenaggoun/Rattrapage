@@ -1,13 +1,7 @@
-
-
-
-const UserService = require("../../2_Application/services/UserService");
-const UserRepository = require("../../3_InfraStructure/Repositories/MangoDbUserRepository");
-const PasswordHasher = require("../../3_InfraStructure/security/bcrypt");
-const JwtService = require("../../3_InfraStructure/security/jwtService");
-
-
-
+import UserService from "../../2_Application/services/UserService.js";
+import UserRepository from "../../3_InfraStructure/Repositories/MangoDbUserRepository.js";
+import PasswordHasher from "../../3_InfraStructure/security/bcrypt.js";
+import JwtService from "../../3_InfraStructure/security/jwtService.js";
 
 const SALT_ROUNDS = Number(process.env.SALT_ROUNDS);
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -18,40 +12,38 @@ const tokenService = new JwtService(JWT_SECRET);
 
 const service = new UserService(repository, passwordHasher, tokenService);
 
-
-
-
-
-exports.getAll = async (req, res, next) => {
+const getAll = async (req, res, next) => {
     try {
         const users = await service.getUsers.execute();
         res.status(200).json(users);
     } catch (error) {
-        res.status(500).json({ message: error.message })
-        next(error)
+        res.status(500).json({ message: error.message });
+        next(error);
     }
+};
 
-}
-
-exports.register = async (req, res, next) => {
+const register = async (req, res, next) => {
     try {
         const result = await service.registerUser.execute(req.body);
         res.status(201).json(result);
     } catch (error) {
-        res.status(500).json({ message: error.message })
-        next(error)
-
+        res.status(500).json({ message: error.message });
+        next(error);
     }
-}
+};
 
-exports.login = async (req, res, next) => {
+const login = async (req, res, next) => {
     try {
         const result = await service.loginUser.execute(req.body);
         res.status(200).json(result);
     } catch (error) {
-        res.status(500).json({ message: error.message })
-        next(error)
+        res.status(500).json({ message: error.message });
+        next(error);
     }
+};
 
-}
-
+export default {
+    getAll,
+    register,
+    login,
+};

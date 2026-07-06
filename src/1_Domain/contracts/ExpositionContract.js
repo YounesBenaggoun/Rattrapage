@@ -4,4 +4,4 @@ class ExpositionContract {
 
 }
 
-module.exports = ExpositionContract;
+export default ExpositionContract;

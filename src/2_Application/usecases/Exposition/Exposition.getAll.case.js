@@ -1,4 +1,4 @@
-const Exposition = require("../../../1_Domain/entities/Exposition");
+import Exposition from "../../../1_Domain/entities/Exposition.js";
 
 
 
@@ -13,4 +13,4 @@ class ExpositionGetAll {
     }
 }
 
-module.exports = ExpositionGetAll;
+export default ExpositionGetAll;

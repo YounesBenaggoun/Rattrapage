@@ -8,4 +8,4 @@ class GetUsers {
     }
 }
 
-module.exports = GetUsers;
+export default GetUsers;

@@ -1,8 +1,8 @@
-const jwt = require('jsonwebtoken');
-const ITokenService = require('../../1_Domain/contracts/security/itokenService');
+import jwt from "jsonwebtoken";
+import ITokenService from "../../1_Domain/contracts/security/itokenService.js";
 
 class JwtService extends ITokenService {
-    constructor(secret, expiresIn = '180d') {
+    constructor(secret, expiresIn = "180d") {
         super();
         this.secret = secret;
         this.expiresIn = expiresIn;
@@ -17,4 +17,4 @@ class JwtService extends ITokenService {
     }
 }
 
-module.exports = JwtService;
+export default JwtService;
