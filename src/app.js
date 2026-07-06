@@ -3,7 +3,6 @@ const router = express.Router();
 
 
 const ConnectMongDB = require("./3_InfraStructure/config/mongoConnect");
-
 ConnectMongDB();
 
 const app = express();
