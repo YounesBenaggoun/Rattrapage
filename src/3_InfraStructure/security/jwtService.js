@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import ITokenService from "../../1_Domain/interface/security/TokenServiceInterface.js";
+import ITokenService from "../../1_Domain/interface/security/TokenService.Interface.js";
 
 class JwtService extends ITokenService {
     constructor(secret, expiresIn = "180d") {

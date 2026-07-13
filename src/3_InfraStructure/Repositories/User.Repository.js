@@ -1,4 +1,4 @@
-import UserInterface from "../../1_Domain/interface/UserInterface.js";
+import UserInterface from "../../1_Domain/interface/User.Interface.js";
 import User from "../database/models/user.model.js";
 
 class UserRepositoryMongoDb extends UserInterface {

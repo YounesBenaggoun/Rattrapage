@@ -1,4 +1,4 @@
-import ExpositionContract from "../../1_Domain/interface/ExpositionInterface.js";
+import ExpositionContract from "../../1_Domain/interface/Exposition.Interface.js";
 import Exposition from "../database/models/Exposition.model.js";
 
 class ExpositionRepository extends ExpositionContract {

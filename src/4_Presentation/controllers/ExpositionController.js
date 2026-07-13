@@ -1,7 +1,7 @@
-import ExpositionRepository from "../../3_InfraStructure/Repositories/ExpositionRepository.js";
+import ExpositionRepository from "../../3_InfraStructure/Repositories/Exposition.Repository.js";
 
-import ExpositionAdd from "../../2_Application/usecases/Exposition/Exposition.Add.case.js";
-import ExpositionGetAll from "../../2_Application/usecases/Exposition/Exposition.getAll.case.js";
+import ExpositionAdd from "../../2_Application/usecases/Exposition/Exposition.Add.usecase.js";
+import ExpositionGetAll from "../../2_Application/usecases/Exposition/Exposition.getAll.usecase.js";
 
 const repository = new ExpositionRepository();
 
@@ -29,6 +29,6 @@ const getAll = async (req, res) => {
     }
 };
 export default {
-    add, 
-    getAll
+    add
+    , getAll
 };

@@ -5,8 +5,8 @@ import { Role } from "../../1_Domain/entities/Role.js";
 
 import expositionController from "../controllers/ExpositionController.js";
 
-import authMiddleware from "../middlewares/authMiddleware.js";
-import roleMiddleware from "../middlewares/roleMiddleware.js";
+import authMiddleware from "../middlewares/auth.Middleware.js";
+import roleMiddleware from "../middlewares/role.Middleware.js";
 
 router.post(
     "/add",
