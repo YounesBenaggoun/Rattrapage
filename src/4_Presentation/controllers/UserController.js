@@ -5,7 +5,7 @@ import UserRepository from "../../3_InfraStructure/Repositories/MangoDbUserRepos
 import PasswordHasher from "../../3_InfraStructure/security/bcrypt.js";
 import JwtService from "../../3_InfraStructure/security/jwtService.js";
 
-import Config from "../../config/env.js"
+import Config from "../../config/env.js";
 
 
 

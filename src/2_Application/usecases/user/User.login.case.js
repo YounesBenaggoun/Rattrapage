@@ -9,22 +9,22 @@ class UserLogin {
 
         const existingUser = await this.userRepository.findByEmail(email);
         if (!existingUser) {
-            throw new Error('Invalid email');
+            throw new Error("Invalid email");
         }
         const match = await this.passwordHasher.compare(password, existingUser.password);
         if (!match) {
-            throw new Error('Invalid email or password');
+            throw new Error("Invalid email or password");
         }
         const token = this.tokenService.generateToken({
             id: existingUser.id,
             email,
             role: existingUser.role
-        })
+        });
         return {
             user: existingUser,
             token
-        }
+        };
     }
 }
 
-export default UserLogin
+export default UserLogin;

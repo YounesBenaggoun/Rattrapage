@@ -10,7 +10,7 @@ class RegisterUser {
     async execute({ name, email, password, role }) {
         const existingUser = await this.userRepository.findByEmail(email);
         if (existingUser) {
-            throw new Error('A user with this email already exists');
+            throw new Error("A user with this email already exists");
         }
         const hashedPassword = await this.passwordHasher.hash(password);
         const user = new User({
@@ -24,12 +24,12 @@ class RegisterUser {
             id: newUser.id,
             email,
             role: newUser.role
-        })
+        });
 
         return {
             token,
             user: newUser
-        }
+        };
     }
 }
 export default RegisterUser;

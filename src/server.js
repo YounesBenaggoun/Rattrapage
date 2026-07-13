@@ -1,7 +1,7 @@
 
 import app from "./app.js";
 import ConnectMongDB from "./3_InfraStructure/config/mongoConnect.js";
-import Config from "./config/env.js"
+import Config from "./config/env.js";
 
 
 
@@ -17,6 +17,7 @@ ConnectMongDB(MONGO_URI);
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
 
 
 

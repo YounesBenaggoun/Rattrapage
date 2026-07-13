@@ -31,4 +31,4 @@ const getAll = async (req, res) => {
 export default {
     add, 
     getAll
-}
+};
