@@ -19,6 +19,20 @@ class Exposition {
         this.maxExposer = maxExposer;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.validate();
+    }
+    validate() {
+        this.validateDate();
+
+
+    }
+    validateDate() {
+        const start = new Date(this.startDate);
+        const end = new Date(this.endDate);
+
+        if(start.getTime() >= end.getTime()){
+            throw new Error("Start Date est inferieur que End Date")
+        }
     }
 }
 

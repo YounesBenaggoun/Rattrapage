@@ -1,54 +1,29 @@
+import ReservationAdd from "../../2_Application/usecases/Reservation/Reservation.Add.usecase.js";
+import ReservationRepository from "../../3_InfraStructure/Repositories/Reservation.Repository.js";
+import ExpositionRepository from "../../3_InfraStructure/Repositories/Exposition.Repository.js";
 
 
-import Exposition from "../../3_InfraStructure/database/models/Exposition.model.js";
-import Reservation from "../../3_InfraStructure/database/models/Reservation.model.js";
+const repoReservation = new ReservationRepository();
+const repoExposition = new ExpositionRepository();
+
+const reservationAdd = new ReservationAdd(repoReservation, repoExposition);
+
+
+
+
 const add = async (req, res) => {
     try {
-        console.log(req.user);
+        const { expositionId } = req.body;
         const visitorId = req.user.id;
-        const expositionId = "6a55f08287701b676bdc0838";
-        const exposition = await Exposition.findById(expositionId);
-
-        if (!exposition) {
-            throw new Error("Exposition not found");
-        }
-        const totalReservations = await Reservation.countDocuments({
-            expositionId: expositionId,
-            status: "CONFIRMED",
-        });
-        console.log("total Reservation ", totalReservations);
-
-        if (totalReservations >= exposition.maxVisitors) {
-            throw new Error("Exposition is full");
-        }
-
-        const alreadyReserved = await Reservation.findOne({
-            visitorId: visitorId,
-            expositionId: expositionId,
-        });
-
-        if (alreadyReserved) {
-            throw new Error("Visitor already Reserved");
-        }
-
-        const newReservation = Reservation.create({
-            visitorId: visitorId,
-            expositionId: expositionId,
-        });
-        res.status(201).json(newReservation);
-
-
+        console.log(req.user.id);
+        const reservation = await reservationAdd.execute({ expositionId, visitorId });
+        res.status(201).json(reservation);
 
     } catch (error) {
         res.status(500).json({
             message: error.message
         })
-
     }
-
-
-
-
 
 
 }
