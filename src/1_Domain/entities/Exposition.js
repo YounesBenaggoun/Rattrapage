@@ -7,8 +7,8 @@ class Exposition {
         description,
         maxVisitor,
         maxExposer,
-        startTime,
-        endTime,
+        startDate,
+        endDate,
     }) {
         this.id = id;
         this.title = title;
@@ -17,8 +17,8 @@ class Exposition {
         this.description = description;
         this.maxVisitor = maxVisitor;
         this.maxExposer = maxExposer;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 }
 

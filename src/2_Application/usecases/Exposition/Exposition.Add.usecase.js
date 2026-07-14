@@ -13,8 +13,8 @@ class ExpositionAdd {
         description,
         maxVisitor,
         maxExposer,
-        startTime,
-        endTime,
+        startDate,
+        endDate,
     }) {
         const exposition = new Exposition({
             id,
@@ -24,8 +24,8 @@ class ExpositionAdd {
             description,
             maxVisitor,
             maxExposer,
-            startTime,
-            endTime,
+            startDate,
+            endDate,
         });
 
         const newExposition = await this.expositionRepository.save(exposition);

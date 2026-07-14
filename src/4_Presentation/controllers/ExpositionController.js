@@ -10,6 +10,7 @@ const expositionGetAll = new ExpositionGetAll(repository);
 
 const add = async (req, res) => {
     try {
+        console.log(req.body);
         const result = await expositionAdd.execute(req.body);
         return res.status(201).json(result);
     } catch (error) {

@@ -1,4 +1,4 @@
-import Config from "../../config/env.js";
+import Config from "../../config.env.js";
 
 import AllUser from "../../2_Application/usecases/user/User.getAll.usecase.js";
 import RegisterUser from "../../2_Application/usecases/user/User.register.usecase.js";

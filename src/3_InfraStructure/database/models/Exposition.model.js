@@ -30,21 +30,23 @@ const expositionSchema = new mongoose.Schema({
     required: true,
     min: 1,
   },
-  startTime: {
+  startDate: {
     type: Date,
     required: true,
   },
-  endTime: {
+  endDate: {
     type: Date,
     required: true,
     validate: {
       validator: function (value) {
-        return value > this.startTime;
+        return value > this.startDate;
       },
-      message: "endTime doit être supérieur à startTime",
+      message: "endDate doit être supérieur à startDate",
     },
   },
-});
+}, 
+{ timestamps: true }
+);
 
 const Exposition = mongoose.model("Exposition", expositionSchema);
 

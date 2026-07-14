@@ -1,8 +1,5 @@
-import dotenv from "dotenv";
+import dotenv from "dotenv/config";
 
-dotenv.config({
-    quiet: true,
-});
 
 import { describe, test, expect, beforeAll, afterAll } from "vitest";
 import mongoose from "mongoose";
@@ -22,18 +19,17 @@ afterAll(async () => {
 });
 
 
-
-
 describe("Authentication", () => {
     let organizerToken;
     let visitorToken;
     let exposerToken;
+
     test("ORGANIZER login", async () => {
         const res = await request(app)
             .post("/user/login")
             .send({
-                email: "younes.benaggoun3@gmail.com",
-                password: "12341234",
+                email: "organizer@gmail.com",
+                password: "12341234"
             });
         expect(res.status).toBe(200);
         expect(res.body.user.role).toBe("organizer");
