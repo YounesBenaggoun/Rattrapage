@@ -19,10 +19,10 @@ afterAll(async () => {
 const expositionRepository = new ExpositionRepository();
 
 describe("Exposition TEST", () => {
-    it("should get Adress inSide", async () => {
+    it("should get address inSide", async () => {
         const result = await expositionRepository.findById("6a560532cebb4e14ed6b7647");
         console.log(result);
-        expect(result).toHaveProperty("adress");
+        expect(result).toHaveProperty("address");
 
     });
     it("should get the Same id", async () => {

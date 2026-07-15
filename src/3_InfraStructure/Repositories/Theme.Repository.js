@@ -3,10 +3,12 @@ import ThemeModel from "../../3_InfraStructure/database/models/Theme.model.js";
 
 class ThemeRepository extends ITheme {
     constructor() {
-
+        super();
     }
-    create(theme) {
-        const newObjet = await ThemeModel.create(reservation);
+    async create(theme) {
+        const newObjet = await ThemeModel.create(theme);
         return newObjet;
     }
 }
+
+export default ThemeRepository

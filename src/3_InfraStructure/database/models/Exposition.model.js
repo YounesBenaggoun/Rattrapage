@@ -1,27 +1,31 @@
 import mongoose from "mongoose";
 
+const THEMES = ['action', 'horror', 'history'];
+
 const expositionSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
     trim: true,
   },
-  adress: {
+  address: {
     type: String,
     required: true,
     trim: true,
   },
-  // theme: {
-  //   type: String,
-  //   required: true,
-  //   trim: true,
-  // },
-  themeIds: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Theme",
-    },
-  ],
+  theme:
+  {
+    type: ["string"],
+    // enum: THEMES,
+    required: true,
+    validate: {
+      validator: function (arr) {
+        return Array.isArray(arr) && arr.length > 0;
+      },
+      message: 'An exposition must have at least one theme.'
+    }
+  }
+  ,
   description: {
     type: String,
     default: "",

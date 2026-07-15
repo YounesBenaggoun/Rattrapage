@@ -19,7 +19,7 @@ afterAll(async () => {
 const reservationRepository = new ReservationRepository();
 
 describe("Reservation TEST", () => {
-    // it("should get Adress inSide", async () => {
+    // it("should get address inSide", async () => {
     //     const result = await reservationRepository.countReservationByExposition({
     //         "expositionId": "6a560532cebb4e14ed6b7647"
     //     });

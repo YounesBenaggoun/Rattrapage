@@ -2,7 +2,7 @@ class Exposition {
     constructor({
         id,
         title,
-        adress,
+        address,
         theme,
         description,
         maxVisitor,
@@ -12,7 +12,7 @@ class Exposition {
     }) {
         this.id = id;
         this.title = title;
-        this.adress = adress;
+        this.address = address;
         this.theme = theme;
         this.description = description;
         this.maxVisitor = maxVisitor;
@@ -30,7 +30,7 @@ class Exposition {
         const start = new Date(this.startDate);
         const end = new Date(this.endDate);
 
-        if(start.getTime() >= end.getTime()){
+        if (start.getTime() >= end.getTime()) {
             throw new Error("Start Date est inferieur que End Date")
         }
     }

@@ -8,7 +8,7 @@ class ExpositionAdd {
     async execute({
         id,
         title,
-        adress,
+        address,
         theme,
         description,
         maxVisitor,
@@ -19,7 +19,7 @@ class ExpositionAdd {
         const exposition = new Exposition({
             id,
             title,
-            adress,
+            address,
             theme,
             description,
             maxVisitor,
