@@ -1,0 +1,24 @@
+info:
+  name: localhost:5000/reservation/add
+  type: http
+  seq: 7
+
+http:
+  method: POST
+  url: localhost:5000/reservation/add
+  headers:
+    - name: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTYwNTBmY2ViYjRlMTRlZDZiNzY0NiIsImVtYWlsIjoidmlzaXRvckBnbWFpbC5jb20iLCJyb2xlIjoidmlzaXRvciIsImlhdCI6MTc4NDA2NjczOSwiZXhwIjoxNzk5NjE4NzM5fQ.rSVEHbyuEqw1ASh2pAKVldEqahar2LTPsm-Qcdq978A
+  body:
+    type: json
+    data: |-
+      {
+          "expositionId" : "6a560532cebb4e14ed6b7647"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

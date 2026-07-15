@@ -1,0 +1,22 @@
+info:
+  name: localhost:5000/theme/add
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: localhost:5000/theme/add
+  body:
+    type: json
+    data: |-
+      {
+        "name" : "Aérien",
+        "description" : "Photos prises par drone ou depuis les airs."
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

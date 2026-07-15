@@ -1,0 +1,22 @@
+info:
+  name: localhost:5000/user/login ORGANIZER
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: localhost:5000/user/login
+  body:
+    type: json
+    data: |-
+      {
+          "email" : "organizer@gmail.com",
+          "password" : "12341234"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

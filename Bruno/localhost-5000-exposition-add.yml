@@ -1,0 +1,39 @@
+info:
+  name: localhost:5000/exposition/add
+  type: http
+  seq: 6
+
+http:
+  method: POST
+  url: localhost:5000/exposition/add
+  headers:
+    - name: Authorization
+      value: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTYwNTA1Y2ViYjRlMTRlZDZiNzY0NCIsImVtYWlsIjoib3JnYW5pemVyQGdtYWlsLmNvbSIsInJvbGUiOiJvcmdhbml6ZXIiLCJpYXQiOjE3ODQxMjUwODQsImV4cCI6MTc5OTY3NzA4NH0.f7QNYL_dtXNw3n4041j9ugqH_Myh91oo48NTRv7NZXo
+  body:
+    type: json
+    data: |-
+      {
+        "title": "Wild Africa",
+        "address": "Paris, France",
+        "tags" : ["action", "horror"],
+        "scores" : 10,
+        "themeIds": [
+          "6875c3f2d0f1d8b2d9a11111",
+          "6875c3f2d0f1d8b2d9a22222",
+          "6875c3f2d0f1d8b2d9a33333"
+        ],
+        "theme3" : ["oui","younes"],
+        "theme" : ["6875c3f2d0f1d8b2d9a11111", "horror"],
+        "description": "A photography exhibition featuring African wildlife and landscapes.",
+        "startDate": "2026-08-01T09:00:00.000Z",
+        "endDate": "2026-08-31T18:00:00.000Z",
+        "maxVisitor": 200, 
+        "maxExposer" : 15
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
