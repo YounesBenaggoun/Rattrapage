@@ -11,11 +11,17 @@ const expositionSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-  theme: {
-    type: String,
-    required: true,
-    trim: true,
-  },
+  // theme: {
+  //   type: String,
+  //   required: true,
+  //   trim: true,
+  // },
+  themeIds: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Theme",
+    },
+  ],
   description: {
     type: String,
     default: "",
@@ -44,8 +50,8 @@ const expositionSchema = new mongoose.Schema({
       message: "endDate doit être supérieur à startDate",
     },
   },
-}, 
-{ timestamps: true }
+},
+  { timestamps: true }
 );
 
 const Exposition = mongoose.model("Exposition", expositionSchema);
