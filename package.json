@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "nodemon src/server.js",
     "test": "npx vitest --reporter verbose",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "@eslint/js": "^10.0.1",
     "eslint": "^10.7.0",
     "globals": "^17.7.0",
+    "husky": "^9.1.7",
     "nodemon": "^3.1.14",
     "supertest": "^7.2.2",
     "vitest": "^4.1.10"
