@@ -18,4 +18,8 @@ app.use("/exposition", expositionRouter);
 app.use("/reservation", reservationRouter);
 app.use("/theme", themeRouter);
 
+app.get("/", async (req, res) => {
+    console.log("oui");
+})
+
 export default app;
