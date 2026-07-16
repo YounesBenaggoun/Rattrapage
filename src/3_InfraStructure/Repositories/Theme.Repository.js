@@ -9,6 +9,10 @@ class ThemeRepository extends ITheme {
         const newObjet = await ThemeModel.create(theme);
         return newObjet;
     }
+    async getAll() {
+        const result = await ThemeModel.find();
+        return result;
+    }
 }
 
 export default ThemeRepository

@@ -35,4 +35,4 @@ const service = new RecommendationService();
 let result = service.calculateScore(visitorA, expoA);
 let result2 = service.recommend(visitorA, tab);
 
-console.log(result2);
+

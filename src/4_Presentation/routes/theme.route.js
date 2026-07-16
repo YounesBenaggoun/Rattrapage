@@ -5,5 +5,6 @@ const router = express.Router();
 
 
 router.post("/add", themeController.add);
+router.get("/", themeController.getAll);
 
 export default router;

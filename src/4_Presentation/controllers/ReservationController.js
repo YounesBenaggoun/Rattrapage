@@ -15,7 +15,7 @@ const add = async (req, res) => {
     try {
         const { expositionId } = req.body;
         const visitorId = req.user.id;
-        console.log(req.user.id);
+        
         const reservation = await reservationAdd.execute({ expositionId, visitorId });
         res.status(201).json(reservation);
 

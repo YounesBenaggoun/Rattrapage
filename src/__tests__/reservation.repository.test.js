@@ -30,7 +30,7 @@ describe("Reservation TEST", () => {
     //         visitorId: "6a56050fcebb4e14ed6b7646",
     //         expositionId: "6a560532cebb4e14ed6b7647"
     //     });
-    //     console.log(result);
+    //     
     //     expect(result).toBeFalsy();
     // });
     it("Reservation Save", async () => {
@@ -38,7 +38,6 @@ describe("Reservation TEST", () => {
             visitorId: "6a56050fcebb4e14ed6b7646",
             expositionId: "6a560532cebb4e14ed6b7647"
         });
-        console.log(result);
         expect(result).toBeFalsy();
     });
 
