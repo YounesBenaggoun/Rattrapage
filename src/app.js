@@ -9,7 +9,6 @@ import themeRouter from "./4_Presentation/routes/theme.route.js";
 
 
 
-
 const app = express();
 
 app.use(express.json());
@@ -18,8 +17,7 @@ app.use("/exposition", expositionRouter);
 app.use("/reservation", reservationRouter);
 app.use("/theme", themeRouter);
 
-app.get("/", async (req, res) => {
-    console.log("oui");
-})
+
+
 
 export default app;

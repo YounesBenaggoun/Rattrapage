@@ -32,4 +32,5 @@ reservationSchema.index(
     },
 );
 
-export default mongoose.model("Reservation", reservationSchema);
+const ReservationModel =  mongoose.model("Reservation", reservationSchema);
+export default ReservationModel;

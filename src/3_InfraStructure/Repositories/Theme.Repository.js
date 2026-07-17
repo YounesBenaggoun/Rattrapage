@@ -13,6 +13,18 @@ class ThemeRepository extends ITheme {
         const result = await ThemeModel.find();
         return result;
     }
+    async update(id, themeData) {
+        return await ThemeModel.findByIdAndUpdate(
+            id,
+            themeData,
+            {
+                returnDocument: "after",
+            },
+        );
+    }
+    async delete(id) {
+        return await ThemeModel.findByIdAndDelete(id);
+    }
 }
 
 export default ThemeRepository

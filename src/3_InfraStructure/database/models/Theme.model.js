@@ -19,4 +19,5 @@ const themeSchema = new mongoose.Schema(
     }
 );
 
-export default mongoose.model("Theme", themeSchema);
+const ThemeModel = mongoose.model("Theme", themeSchema);
+export default ThemeModel;

@@ -6,7 +6,6 @@ class AddTheme {
     }
     async execute(theme) {
         return await this.repository.create(theme);
-        // return true;
     }
 }
 

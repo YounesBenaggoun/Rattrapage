@@ -58,6 +58,6 @@ const expositionSchema = new mongoose.Schema({
   { timestamps: true }
 );
 
-const Exposition = mongoose.model("Exposition", expositionSchema);
+const ExpositionModel = mongoose.model("Exposition", expositionSchema);
 
-export default Exposition;
+export default ExpositionModel;
