@@ -33,7 +33,6 @@ class ReservationAdd {
         if (alreadyReserved) {
             throw new AppError("Visitor already Reserved", 409);
         }
-        console.log(visitorId, expositionId);
         const newReservation = new Reservation({
             visitorId,
             expositionId,

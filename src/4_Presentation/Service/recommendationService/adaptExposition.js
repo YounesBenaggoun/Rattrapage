@@ -2,18 +2,15 @@ import getDistanceBetween from "./DistanceService.js";
 
 let result = {};
 
-const adapt = async function ({ visitor, exposition }) {
-
-
+const adaptExposition = function (exposition) {
     result = {};
     result.theme = exposition.theme.name;
     result.duration = exposition.duration;
-    result.distance = await getDistance(visitor.address, exposition.address);
+    result.address =  exposition.address;
     result.availableSlots = exposition.maxVisitor - exposition.reservationCount;
     result.crowd = exposition.reservationCount;
-
-    console.log(result);
-
+    result.businessPriority = 0;
+    return result;
 }
 
 async function getDistance(a, b) {
@@ -27,4 +24,4 @@ async function getDistance(a, b) {
 
 
 
-export default adapt;
+export default adaptExposition;

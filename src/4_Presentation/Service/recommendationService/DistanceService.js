@@ -45,15 +45,18 @@ async function calculateDistance(lat1, lon1, lat2, lon2) {
 }
 
 async function getDistanceBetween(address1, address2) {
-    const a = await getCoordinates(address1);
-    const b = await getCoordinates(address2);
-
-    return await calculateDistance(
-        a.lat,
-        a.lon,
-        b.lat,
-        b.lon
-    );
+    try {
+        const a = await getCoordinates(address1);
+        const b = await getCoordinates(address2);
+        return await calculateDistance(
+            a.lat,
+            a.lon,
+            b.lat,
+            b.lon
+        );
+    } catch (error) {
+        return "error";
+    }
 }
 
 
