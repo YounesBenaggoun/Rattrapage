@@ -12,10 +12,21 @@ router.put("/:id",
     authMiddleware,
     roleMiddleware(Role.ORGANIZER),
     themeController.update);
+
+router.delete("/:id",
+    authMiddleware,
+    roleMiddleware(Role.ORGANIZER),
+    themeController.delete);
+
 router.post("/add",
     authMiddleware,
     roleMiddleware(Role.ORGANIZER),
     themeController.add);
+
+
+
 router.get("/", themeController.getAll);
+
+
 
 export default router;

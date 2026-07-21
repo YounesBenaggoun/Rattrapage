@@ -1,4 +1,7 @@
 import Reservation from "../../../1_Domain/entities/Reservation.js";
+import AppError from "../../../1_Domain/error/AppError.js";
+
+
 
 class ReservationAdd {
     constructor(reservationRepository, expositionRepository) {
@@ -12,22 +15,25 @@ class ReservationAdd {
     }) {
         const exposition = await this.expositionRepository.findById(expositionId);
         if (!exposition) {
-            throw new Error("Exposition not Found");
+            throw new AppError("Exposition not Found", 404);
         }
         const totalReservations = await this.reservationRepository.countReservationByExposition({
             expositionId: expositionId,
             status: true,
         });
+
         if (totalReservations >= exposition.maxVisitor) {
-            throw new Error("Exposition is full");
+            throw new AppError("Exposition is full", 400);
         }
         const alreadyReserved = await this.reservationRepository.findOne({
             visitorId,
             expositionId
         });
+
         if (alreadyReserved) {
-            throw new Error("Visitor already Reserved");
+            throw new AppError("Visitor already Reserved", 409);
         }
+        console.log(visitorId, expositionId);
         const newReservation = new Reservation({
             visitorId,
             expositionId,

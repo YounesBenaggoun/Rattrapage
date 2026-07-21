@@ -30,7 +30,9 @@ class Exposition {
         const start = new Date(this.startDate);
         const end = new Date(this.endDate);
         if (start.getTime() >= end.getTime()) {
-            throw new Error("Start Date est inferieur que End Date")
+            const error = new Error("Start Date est inferieur que End Date")
+            error.statusCode = 400;
+            throw error;
         }
     }
 }

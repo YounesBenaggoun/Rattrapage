@@ -16,7 +16,9 @@ async function getCoordinates(address) {
     );
 
     if (!data.length) {
-        throw new Error(`Address not found: ${address}`);
+        const error = new Error(`Address not found: ${address}`);
+        error.statusCode = 404;
+        throw error;
     }
 
     return {

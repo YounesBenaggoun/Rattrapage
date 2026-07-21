@@ -1,6 +1,8 @@
 import IReservation from "../../1_Domain/interface/Reservation.interface.js";
 import ReservationModel from "../database/models/Reservation.model.js";
 
+
+
 class ReservationRepository extends IReservation {
     constructor() {
         super();
@@ -21,6 +23,7 @@ class ReservationRepository extends IReservation {
         return alreadyReserved;
     }
     async save(reservation) {
+        await ReservationModel.syncIndexes();
         const newReservation = await ReservationModel.create(reservation);
         return newReservation;
     }

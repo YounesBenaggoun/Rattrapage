@@ -12,10 +12,6 @@ const adapt = async function ({ visitor, exposition }) {
     result.availableSlots = exposition.maxVisitor - exposition.reservationCount;
     result.crowd = exposition.reservationCount;
 
-
-
-
-
     console.log(result);
 
 }

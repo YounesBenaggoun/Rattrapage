@@ -15,12 +15,12 @@ const add = async (req, res) => {
     try {
         const { expositionId } = req.body;
         const visitorId = req.user.id;
-        
+
         const reservation = await reservationAdd.execute({ expositionId, visitorId });
         res.status(201).json(reservation);
 
     } catch (error) {
-        res.status(500).json({
+        res.status(error.statusCode || 500).json({
             message: error.message
         })
     }

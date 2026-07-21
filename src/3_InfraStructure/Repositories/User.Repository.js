@@ -25,14 +25,11 @@ class UserRepositoryMongoDb extends UserInterface {
             password: user.password,
             role: user.role
         });
-
         return newUser;
     }
-
     async findAll() {
         const list = await User.find();
         return list;
     }
 }
-
 export default UserRepositoryMongoDb;

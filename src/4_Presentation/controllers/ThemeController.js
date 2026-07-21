@@ -3,6 +3,8 @@ import ThemeRepository from "../../3_InfraStructure/Repositories/Theme.Repositor
 import AddTheme from "../../2_Application/usecases/Theme/Theme.add.usecase.js";
 import GetAllTheme from "../../2_Application/usecases/Theme/Theme.getAll.usecase.js";
 import UpdateTheme from "../../2_Application/usecases/Theme/Theme.update.usecase.js";
+import DeleteTheme from "../../2_Application/usecases/Theme/Theme.delete.usecase.js";
+
 
 
 
@@ -11,6 +13,7 @@ const repository = new ThemeRepository();
 const useAddTheme = new AddTheme(repository);
 const useGetAllTheme = new GetAllTheme(repository);
 const useUpdateTheme = new UpdateTheme(repository);
+const useDeleteTheme = new DeleteTheme(repository);
 
 
 
@@ -18,7 +21,6 @@ const Controller = {}
 
 Controller.add = async (req, res) => {
     try {
-
         const result = await useAddTheme.execute(req.body);
         return res.status(201).json(result);
     } catch (error) {
@@ -35,6 +37,31 @@ Controller.getAll = async (req, res) => {
     }
 
 }
+
+Controller.delete = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const theme = await useDeleteTheme.execute(id);
+        if (!theme) {
+            return res.status(404).json({
+                message: "Theme not found",
+            });
+        }
+        res.status(200).json({
+            message : "Deleted",
+            theme
+
+        }
+            );
+    } catch (error) {
+        res.status(500).json({
+            source: "controller.update.theme",
+            message: error.message,
+        });
+    }
+};
+
+
 Controller.update = async (req, res) => {
     try {
         const { id } = req.params;

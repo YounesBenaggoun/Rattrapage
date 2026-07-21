@@ -22,13 +22,13 @@ const expositionId = "6a5a74a61e268508a4db895e";
 describe("Exposition TEST", () => {
     it("should get address inSide", async () => {
         const result = await expositionRepository.findById(expositionId);
-        console.log(result);
+        
         // expect(result).toHaveProperty("address");
 
     });
     // it("should get the Same id", async () => {
     //     const result = await expositionRepository.findById(expositionId);
-    //     console.log(result);
+    //     
 
 
     //     expect(result.id).toBe(expositionId);

@@ -9,9 +9,6 @@ import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import mongoose from "mongoose";
 
 
-// import app from "../app.js";
-
-
 
 
 const MONGO_URI = process.env.MONGO_URI;
@@ -34,7 +31,7 @@ describe("Test Theme Repository", () => {
     //         "name": "younes",
     //         "description": "younes Description"
     //     });
-    //     console.log(result);
+    //   
     //     expect(result).toBeFalsy();
     // });
     it("Theme Create", async () => {
@@ -43,12 +40,12 @@ describe("Test Theme Repository", () => {
                 "name": "younes modif",
                 "description": "younes Description"
             });
-        console.log(result);
+        
         // expect(result).toBeFalsy();
     });
     it("Theme Remove", async () => {
         const result = await themeRepository.delete("6a5a236e401cad1734e9c24e");
-        console.log(result);
+        
         // expect(result).toBeFalsy();
     });
 

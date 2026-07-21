@@ -26,9 +26,10 @@ const loginUser = new LoginUser(repository, passwordHasher, tokenService);
 
 
 
+const UserController = {};
 
 
-const getAll = async (req, res) => {
+UserController.getAll = async (req, res) => {
     try {
         const users = await allUser.execute();
         res.status(200).json(users);
@@ -38,7 +39,7 @@ const getAll = async (req, res) => {
 };
 
 
-const register = async (req, res) => {
+UserController.register = async (req, res) => {
     try {
         const result = await registerUser.execute(req.body);
         res.status(201).json(result);
@@ -49,7 +50,7 @@ const register = async (req, res) => {
     }
 };
 
-const login = async (req, res) => {
+UserController.login = async (req, res) => {
     try {
         const result = await loginUser.execute(req.body);
         res.status(200).json(result);
@@ -58,8 +59,4 @@ const login = async (req, res) => {
     }
 };
 
-export default {
-    getAll,
-    register,
-    login,
-};
+export default UserController;
