@@ -6,9 +6,18 @@ import getDistanceBetween from "../Service/recommendationService/DistanceService
 
 const expositionRepository = new ExpositionRepository();
 
+
 const Controller = {}
 
-const recommendation = new RecommendationService();
+const recommendationConfig = {
+    themeCoef: 40,
+    distanceCoef: 0.05,
+    durationCoef: 20,
+    crowdCoef: 0.4,
+    availableSlotsCoef: 2,
+}
+
+const recommendation = new RecommendationService(recommendationConfig);
 
 
 const visitor = {
@@ -25,10 +34,7 @@ const visitor = {
 Controller.getRecommendation = async (req, res) => {
     try {
         const list = await expositionRepository.getAll();
-        let exposition = await adaptExposition(list[1]);
-
         const result = await recommendation.all(visitor, list);
-
         return res.status(200).json(result);
     } catch (error) {
         return res.status(error.statusCode || 500).json({ message: error.message });

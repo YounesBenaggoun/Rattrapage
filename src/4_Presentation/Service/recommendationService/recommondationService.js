@@ -3,17 +3,25 @@ import getDistanceBetween from "./DistanceService.js";
 
 
 export default class RecommendationService {
+    constructor({ themeCoef, distanceCoef, durationCoef, crowdCoef, availableSlotsCoef }) {
+        this.THEME_COEF = themeCoef;
+        this.DISTANCE_COEF = distanceCoef;
+        this.DURATION_COEF = durationCoef;
+        this.CROWD_COEF = crowdCoef;
+        this.AVAILABLESLOTS_COEF = availableSlotsCoef;
+    }
     async calculateScore({ visitor, exposition }) {
         const distance = await getDistanceBetween(visitor.address, exposition.address);
         let score = 0;
         if (visitor.preferences.includes(exposition.theme))
-            score += 40;
+            score += this.THEME_COEF;
         if (visitor.availableTime >= exposition.duration)
-            score += 20;
-        score -= distance * 0.05;
-        score -= exposition.crowd * 0.4;
-        score += exposition.availableSlots * 2;
-        score += exposition.businessPriority * 10;
+            score += this.DURATION_COEF;
+        if (distance !== "error")
+            score -= distance * this.DISTANCE_COEF;
+
+        score -= exposition.crowd * this.CROWD_COEF;
+        score += exposition.availableSlots * this.AVAILABLESLOTS_COEF;
         return score;
     }
     async all(visitor, expositions) {
@@ -29,7 +37,7 @@ export default class RecommendationService {
                     score
                 };
             })
-            .sort((a, b) => b.score - a.score)
+                .sort((a, b) => b.score - a.score)
         );
         return expoWithScore;
     }
