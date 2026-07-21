@@ -1,38 +1,55 @@
-import { expoA } from "./exposition.js";
-import { visitorA } from "./visitor.js";
 import RecommendationService from "./recommondationService.js";
+import { expositions as exposition } from "./exposition.js";
+import adapt from "./adapt.js";
+
+const visitor = {
+    availableTime: 120, // minutes
+    preferences: [
+        "Nature",
+        "Portrait"
+    ],
+    address: "6 place lucie Aubrac, 92220 bagneux, france",
+}
+
+adapt({visitor , exposition});
+
+
+
+
+
+
 
 let tab = [
     {
-        id: 10,
-        title: "Wild Animals",
-        category: "Nature",
-        estimatedVisitTime: 30,
-        capacity: 100,
+        theme: "Nature",
+        duration: 20,
+        businessPriority: 2,
+
 
         distance: 120, // mètres
+
         crowd: 25,
         availableSlots: 8,
-        businessPriority: 2
+
+
     },
     {
-        id: 9,
-        title: "Wild Animals",
-        category: "Nature",
-        estimatedVisitTime: 20,
-        capacity: 100,
 
+        theme: "Nature",
+        duration: 20,
         distance: 120, // mètres
+
+
         crowd: 25,
         availableSlots: 8,
-        businessPriority: 2
+        businessPriority: 20
     }
 ]
 
 
-const service = new RecommendationService();
+// const service = new RecommendationService();
 
-let result = service.calculateScore(visitorA, expoA);
-let result2 = service.recommend(visitorA, tab);
+// let result = service.calculateScore(visitor, expo);
+// let resultTab = service.recommend(visitor, tab);
 
 

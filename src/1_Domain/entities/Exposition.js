@@ -4,6 +4,7 @@ class Exposition {
         title,
         address,
         theme,
+        duration,
         description,
         maxVisitor,
         maxExposer,
@@ -14,6 +15,7 @@ class Exposition {
         this.title = title;
         this.address = address;
         this.theme = theme;
+        this.duration = duration;
         this.description = description;
         this.maxVisitor = maxVisitor;
         this.maxExposer = maxExposer;
@@ -23,17 +25,13 @@ class Exposition {
     }
     validate() {
         this.validateDate();
-
-
     }
     validateDate() {
         const start = new Date(this.startDate);
         const end = new Date(this.endDate);
-
         if (start.getTime() >= end.getTime()) {
             throw new Error("Start Date est inferieur que End Date")
         }
     }
 }
-
 export default Exposition;

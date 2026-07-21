@@ -15,17 +15,9 @@ const expositionSchema = new mongoose.Schema({
   },
   theme:
   {
-    type: ["string"],
-    // enum: THEMES,
-    required: true,
-    validate: {
-      validator: function (arr) {
-        return Array.isArray(arr) && arr.length > 0;
-      },
-      message: 'An exposition must have at least one theme.'
-    }
-  }
-  ,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Theme",
+  },
   description: {
     type: String,
     default: "",
@@ -39,6 +31,11 @@ const expositionSchema = new mongoose.Schema({
     type: Number,
     required: true,
     min: 1,
+  },
+
+  duration: {
+    type: Number,
+    required: true,
   },
   startDate: {
     type: Date,
