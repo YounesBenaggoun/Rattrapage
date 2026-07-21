@@ -17,12 +17,6 @@ export default class RecommendationService {
         return score;
     }
     async all(visitor, expositions) {
-        // const expoWithScore = expositions.map(async (element) => {
-        //     const exposition = adaptExposition(element);
-        //     let tab = await this.calculateScore({ visitor, exposition })
-        //     
-        // });
-        
         const expoWithScore = await Promise.all(
             expositions.map(async (element) => {
                 const exposition = adaptExposition(element);
@@ -31,21 +25,12 @@ export default class RecommendationService {
                     exposition,
                 });
                 return {
-                    exposition,
-                    score,
+                    ...element,
+                    score
                 };
             })
+            .sort((a, b) => b.score - a.score)
         );
-        console.log(expoWithScore)
         return expoWithScore;
-    }
-
-    recommend(visitor, expositions) {
-        return expositions
-            .map(exposition => ({
-                ...exposition,
-                score: this.calculateScore(visitor, exposition)
-            }))
-            .sort((a, b) => b.score - a.score);
     }
 }

@@ -27,22 +27,9 @@ Controller.getRecommendation = async (req, res) => {
         const list = await expositionRepository.getAll();
         let exposition = await adaptExposition(list[1]);
 
-        
+        const result = await recommendation.all(visitor, list);
 
-        // const score = await recommendation.calculateScore({
-        //     visitor,
-        //     exposition
-        // })
-        // console.log(score);
-
-        await recommendation.all(visitor, list);
-
-
-
-
-
-
-        // return res.status(201).json(result);
+        return res.status(200).json(result);
     } catch (error) {
         return res.status(error.statusCode || 500).json({ message: error.message });
     }
