@@ -10,6 +10,7 @@ class Exposition {
         maxExposer,
         startDate,
         endDate,
+        exposerIds, 
     }) {
         this.id = id;
         this.title = title;
@@ -21,6 +22,7 @@ class Exposition {
         this.maxExposer = maxExposer;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.exposerIds = exposerIds;
         this.validate();
     }
     validate() {

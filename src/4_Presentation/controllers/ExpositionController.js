@@ -8,7 +8,9 @@ const repository = new ExpositionRepository();
 const expositionAdd = new ExpositionAdd(repository);
 const expositionGetAll = new ExpositionGetAll(repository);
 
-const add = async (req, res) => {
+const Controller = {};
+
+Controller.add = async (req, res) => {
     try {
         const result = await expositionAdd.execute(req.body);
         return res.status(201).json(result);
@@ -17,7 +19,7 @@ const add = async (req, res) => {
     }
 };
 
-const getAll = async (req, res) => {
+Controller.getAll = async (req, res) => {
     try {
         const result = await expositionGetAll.execute();
         return res.status(200).json(result);
@@ -28,7 +30,4 @@ const getAll = async (req, res) => {
         });
     }
 };
-export default {
-    add
-    , getAll
-};
+export default Controller;

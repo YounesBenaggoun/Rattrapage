@@ -18,6 +18,21 @@ const expositionSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Theme",
   },
+  exposerIds: {
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      }
+    ],
+    validate: {
+      validator: function (ids) {
+        return ids.length === new Set(ids.map(id => id.toString())).size;
+      },
+      message: "Duplicate exposerIds are not allowed",
+    },
+  }
+  ,
   description: {
     type: String,
     default: "",
