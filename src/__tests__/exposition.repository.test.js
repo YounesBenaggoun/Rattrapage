@@ -2,7 +2,7 @@
 
 import { describe, it, expect  } from "vitest";
 
-import ExpositionRepository from "../../3_InfraStructure/Repositories/Exposition.Repository.js";
+import ExpositionRepository from "../3_InfraStructure/Repositories/Exposition.Repository.js";
 
 
 

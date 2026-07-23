@@ -2,15 +2,13 @@ import { describe, expect, afterAll } from "vitest";
 
 
 import request from "supertest";
-import app from "../../app.js";
-import UserModel from "../../3_InfraStructure/database/models/user.model.js";
-import Role from "../../1_Domain/entities/Role.js";
+import app from "../app.js";
+import UserModel from "../3_InfraStructure/database/models/user.model.js";
+import Role from "../1_Domain/entities/Role.js";
 
 import mongoose from "mongoose";
 
 // Before All script in the Setup.js in Vitest.config.json
-
-
 
 
 let organizerToken;
@@ -25,6 +23,13 @@ const ORGANIZER_EMAIL = "organizerTest@gmail.com";
 const EXPOSER_EMAIL = "exposerTest@gmail.com";
 const VISITOR_EMAIL = "visitorTest@gmail.com";
 const PASSWORD = "12341234";
+
+
+afterAll(async () => {
+    await UserModel.findByIdAndDelete(organizerId);
+    await UserModel.findByIdAndDelete(exposerId);
+    await UserModel.findByIdAndDelete(visitorId);
+});
 
 
 describe("Register", () => {
@@ -155,8 +160,3 @@ describe("Register", () => {
 
 
 
-afterAll(async () => {
-    await UserModel.findByIdAndDelete(organizerId);
-    await UserModel.findByIdAndDelete(exposerId);
-    await UserModel.findByIdAndDelete(visitorId);
-});

@@ -1,52 +1,43 @@
-import dotenv from "dotenv";
+import { describe, expect, afterAll } from "vitest";
+
+
 import ThemeRepository from "../3_InfraStructure/Repositories/Theme.Repository";
+import ThemeModel from "../3_InfraStructure/database/models/Theme.model";
 
-dotenv.config({
-    quiet: true,
-});
+const themeRepository = new ThemeRepository();
+let themeId;
 
-import { describe, it, expect, beforeAll, afterAll } from "vitest";
-import mongoose from "mongoose";
-
-
-
-
-const MONGO_URI = process.env.MONGO_URI;
-
-beforeAll(async () => {
-    await mongoose.connect(MONGO_URI);
-    await mongoose.connection.asPromise(); // ensures fully connected
-});
+const THEME_NAME = "Theme Test";
+const UPDATED_THEME_NAME = "Theme Updated";
 
 afterAll(async () => {
-    await mongoose.disconnect();
+    await ThemeModel.findByIdAndDelete(themeId);
 });
 
 
 describe("Test Theme Repository", () => {
-    const themeRepository = new ThemeRepository();
-
-    // it("Theme Create", async () => {
-    //     const result = await themeRepository.create({
-    //         "name": "younes",
-    //         "description": "younes Description"
-    //     });
-    //   
-    //     expect(result).toBeFalsy();
-    // });
     it("Theme Create", async () => {
-        const result = await themeRepository.update("6a5a236e401cad1734e9c24e",
+        const res = await themeRepository.create({
+            "name": THEME_NAME,
+            "description": "ThemeTest Description"
+        });
+        themeId = res.id;
+        expect(res.name).toBe(THEME_NAME);
+    });
+    test("Theme Updated", async () => {
+        const res = await themeRepository.update(themeId,
             {
-                "name": "younes modif",
+                "name": UPDATED_THEME_NAME,
                 "description": "younes Description"
             });
-        
-        // expect(result).toBeFalsy();
+        expect(res.name).toBe(UPDATED_THEME_NAME);
     });
-    it("Theme Remove", async () => {
-        const result = await themeRepository.delete("6a5a236e401cad1734e9c24e");
-        
-        // expect(result).toBeFalsy();
+    test("Theme getAll", async () => {
+        const res = await themeRepository.getAll();
+        expect(res.length).toBeGreaterThan(0);
     });
-
+    test("Theme Remove", async () => {
+        const result = await themeRepository.delete(themeId);
+        expect(result.id).toBe(themeId);
+    });
 });
