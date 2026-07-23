@@ -1,22 +1,14 @@
-import dotenv from "dotenv";
+import dotenv from "dotenv/config";
 
-dotenv.config({
-    quiet: true,
-});
-
-import { describe,  it, expect, beforeAll, afterAll } from "vitest";
+import { describe, expect, beforeAll, afterAll } from "vitest";
 import mongoose from "mongoose";
-// import request from "supertest";
-// import app from "../app.js";
-
-
 
 
 const MONGO_URI = process.env.MONGO_URI;
 
 beforeAll(async () => {
     await mongoose.connect(MONGO_URI);
-    await mongoose.connection.asPromise(); // ensures fully connected
+    await mongoose.connection.asPromise(); // ensures le full connection
 });
 
 afterAll(async () => {
@@ -24,11 +16,11 @@ afterAll(async () => {
 });
 
 describe("MongoDB connection", () => {
-    it("should be connected", () => {
+    test("should be connected", () => {
         expect(mongoose.connection.readyState).toBe(1);
     });
 
-    it("should have a defined db instance", () => {
+    test("should have a defined db instance", () => {
         expect(mongoose.connection.db).toBeDefined();
     });
 });
