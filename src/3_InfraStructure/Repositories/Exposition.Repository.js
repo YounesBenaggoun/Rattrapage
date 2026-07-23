@@ -6,6 +6,7 @@ class ExpositionRepository extends ExpositionInterface {
     constructor() {
         super();
     }
+    
     async delete(id) {
         const deletedExposition = await ExpositionModel.findByIdAndDelete(id);
         return deletedExposition;
@@ -16,6 +17,7 @@ class ExpositionRepository extends ExpositionInterface {
         const newExposition = await ExpositionModel.create(exposition);
         return newExposition;
     }
+
     async addExposerId(expositionId, exposerId) {
         const exposition = await ExpositionModel.findByIdAndUpdate(
             expositionId,
@@ -25,7 +27,7 @@ class ExpositionRepository extends ExpositionInterface {
                 }
             },
             {
-                new: true // return updated document
+                returnDocument: "after" // return updated document
             }
         );
         return exposition;
@@ -40,30 +42,36 @@ class ExpositionRepository extends ExpositionInterface {
                 }
             },
             {
-                new: true
+                returnDocument: "after"
             }
         );
-
         return exposition;
     }
 
     async getAll() {
-        const expositionList = await ExpositionModel.find().populate("theme", "name description");
-
+        const expositionList = await ExpositionModel.find()
+            .populate("theme", "name description");
         const result = await Promise.all(
             expositionList.map(async (exposition) => {
                 const reservationCount = await ReservationModel.countDocuments({
                     expositionId: exposition._id,
                 });
-
                 return {
                     ...exposition.toObject(),
                     reservationCount,
                 };
             })
         );
-
         return result;
+    }
+
+    async findExpositionByExposerId(exposerId) {
+        const expositions = await ExpositionModel.find({
+            exposerIds: { $in: [exposerId] }
+        })
+            .populate("theme", "name description")
+            .populate("exposerIds", "name email")
+        return expositions;
     }
 
     async findById(expositionId) {

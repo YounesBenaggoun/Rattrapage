@@ -18,7 +18,7 @@ router.post(
 router.get(
     "/",
     authMiddleware,
-    roleMiddleware(Role.ORGANIZER),
+    roleMiddleware(Role.ORGANIZER, Role.EXPOSER),
     expositionController.getAll
 );
 
