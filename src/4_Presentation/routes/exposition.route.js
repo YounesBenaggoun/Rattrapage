@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 
-import { Role } from "../../1_Domain/entities/Role.js";
+import  Role  from "../../1_Domain/entities/Role.js";
 
 import expositionController from "../controllers/ExpositionController.js";
 

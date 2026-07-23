@@ -1,4 +1,4 @@
-import { isValidRole, Role } from "./Role.js";
+import Role,  { isValidRole } from "./Role.js";
 import AppError from "../error/AppError.js";
 
 class User {

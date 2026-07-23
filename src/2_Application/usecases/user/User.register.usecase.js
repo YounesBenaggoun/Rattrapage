@@ -1,4 +1,5 @@
 import User from "../../../1_Domain/entities/User.js";
+import AppError from "../../../1_Domain/error/AppError.js";
 
 class RegisterUser {
     constructor(userRepository, passwordHasher, tokenService) {
@@ -10,7 +11,7 @@ class RegisterUser {
     async execute({ name, email, password, role }) {
         const existingUser = await this.userRepository.findByEmail(email);
         if (existingUser) {
-            throw new Error("A user with this email already exists");
+            throw new AppError("A user with this email already exists", 409);
         }
         const hashedPassword = await this.passwordHasher.hash(password);
         const user = new User({

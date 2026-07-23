@@ -1,6 +1,6 @@
 import express from "express";
 import reservationController from "../controllers/ReservationController.js";
-import { Role } from "../../1_Domain/entities/Role.js";
+import  Role  from "../../1_Domain/entities/Role.js";
 import authMiddleware from "../middlewares/auth.Middleware.js";
 import roleMiddleware from "../middlewares/role.Middleware.js";
 

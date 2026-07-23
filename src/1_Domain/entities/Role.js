@@ -1,4 +1,4 @@
-const Role = Object.freeze({
+ const Role = Object.freeze({
     ORGANIZER: "organizer",
     EXPOSER: "exposer",
     VISITOR: "visitor",
@@ -6,8 +6,8 @@ const Role = Object.freeze({
 
 const ALL_ROLES = Object.values(Role);
 
-function isValidRole(role) {
+export function isValidRole(role) {
     return ALL_ROLES.includes(role);
 }
 
-export { Role, ALL_ROLES, isValidRole };
+export default Role;

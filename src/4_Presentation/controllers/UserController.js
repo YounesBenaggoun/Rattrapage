@@ -44,7 +44,7 @@ UserController.register = async (req, res) => {
         const result = await registerUser.execute(req.body);
         res.status(201).json(result);
     } catch (error) {
-        res.status(500).json({
+        res.status(error.statusCode || 500).json({
             message: error.message
         });
     }

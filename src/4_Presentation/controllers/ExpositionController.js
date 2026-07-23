@@ -3,7 +3,7 @@ import ExpositionRepository from "../../3_InfraStructure/Repositories/Exposition
 import ExpositionAdd from "../../2_Application/usecases/Exposition/Exposition.Add.usecase.js";
 import ExpositionGetAll from "../../2_Application/usecases/Exposition/Exposition.getAll.usecase.js";
 import ExpositionGetByExposerId from "../../2_Application/usecases/Exposition/Exposition.getByExposerId.usecase.js";
-import { Role } from "../../1_Domain/entities/Role.js";
+import Role  from "../../1_Domain/entities/Role.js";
 
 const repository = new ExpositionRepository();
 

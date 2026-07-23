@@ -2,7 +2,7 @@ import express from "express";
 import themeController from "../controllers/ThemeController.js";
 import authMiddleware from "../middlewares/auth.Middleware.js";
 import roleMiddleware from "../middlewares/role.Middleware.js";
-import { Role } from "../../1_Domain/entities/Role.js";
+import  Role  from "../../1_Domain/entities/Role.js";
 
 
 const router = express.Router();
