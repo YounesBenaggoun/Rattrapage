@@ -1,10 +1,10 @@
 import dotenv from "dotenv/config";
-
-import { describe, expect, beforeAll, afterAll } from "vitest";
 import mongoose from "mongoose";
+import { describe, expect, test, beforeAll, afterAll } from "vitest";
 
 
 const MONGO_URI = process.env.MONGO_URI;
+
 
 beforeAll(async () => {
     await mongoose.connect(MONGO_URI);
@@ -15,7 +15,7 @@ afterAll(async () => {
     await mongoose.disconnect();
 });
 
-describe("MongoDB connection", () => {
+describe.sequential("MongoDB connection", () => {
     test("should be connected", () => {
         expect(mongoose.connection.readyState).toBe(1);
     });
