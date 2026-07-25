@@ -24,14 +24,24 @@ describe.sequential("Test User Repository", () => {
         userId = res.id;
         expect(res.name).toBe(newUser.name);
     });
+    it("Duplicate User Create", async () => {
+        await expect(
+            repository.save(newUser)
+        ).rejects.toThrow();
 
+        await expect(
+            repository.save(newUser)
+        ).rejects.toMatchObject({
+            code: 11000
+        });
+
+    });
     it("User findByEmail", async () => {
         const res = await repository.findByEmail(newUser.email);
         expect(res.name).toBe(newUser.name);
         expect(res.id).toBe(userId);
 
     });
-
     it("User FindAll", async () => {
         const res = await repository.findAll();
         expect(res.length).toBeGreaterThan(0);
@@ -42,8 +52,4 @@ describe.sequential("Test User Repository", () => {
         userId = res.id;
         expect(res.id).toBe(userId);
     });
-
-
-
-
 });

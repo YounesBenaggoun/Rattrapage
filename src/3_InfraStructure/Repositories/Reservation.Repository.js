@@ -7,6 +7,11 @@ class ReservationRepository extends IReservation {
     constructor() {
         super();
     }
+    async save(reservation) {
+        await ReservationModel.syncIndexes();
+        const newReservation = await ReservationModel.create(reservation);
+        return newReservation;
+    }
 
     async countReservationByExposition({ expositionId, status = true }) {
         const totalReservations = await ReservationModel.countDocuments({
@@ -22,10 +27,12 @@ class ReservationRepository extends IReservation {
         });
         return alreadyReserved;
     }
-    async save(reservation) {
+    
+    async delete(id) {
         await ReservationModel.syncIndexes();
-        const newReservation = await ReservationModel.create(reservation);
+        const newReservation = await ReservationModel.findByIdAndDelete(id);
         return newReservation;
+
     }
 }
 

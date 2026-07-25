@@ -21,9 +21,6 @@ import "../3_InfraStructure/database/models/Reservation.model.js";
 beforeAll(async () => {
     await mongoose.connect(process.env.MONGO_URI);
     await mongoose.connection.asPromise(); // 
-
-
-
 });
 
 

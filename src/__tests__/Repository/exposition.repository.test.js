@@ -67,7 +67,6 @@ describe.sequential("Exposition TEST With Exposer", () => {
 
     it("Should add this second exposerId " + SECOND_RANDOM_EXPOSER_ID + " as and exposerIds", async () => {
         const newExpo = await expositionRepository.addExposerId(expositionId, SECOND_RANDOM_EXPOSER_ID);
-        console.log(newExpo);
         expect(newExpo).toHaveProperty("exposerIds");
         const exposerIds = newExpo.exposerIds;
         expect(exposerIds.includes(SECOND_RANDOM_EXPOSER_ID)).toBeTruthy();
