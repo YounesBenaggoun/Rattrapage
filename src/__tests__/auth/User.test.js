@@ -4,15 +4,21 @@ import app from "../../app.js";
 
 
 import { USERS } from "../constants.js";
-import { authData } from "../setup/auth.data.js";
-import "../setup/cleanup.js";
+import { authData } from "../shared/auth.data.js";
+import "../shared/cleanup.js";
 
-import registerTest  from "./register.js";
-import  loginTests  from "./login.js";
-import  authorizationTests  from "./authorization.js";
+
+import registerTest from "./register.js";
+import loginTests from "./login.js";
+import authorizationTests from "./authorization.js";
+import themeTests from "./theme.js";
+import expositionTest from "./exposition.js";
+
 
 
 registerTest();
 loginTests();
 authorizationTests();
+themeTests();
+expositionTest();
 

@@ -5,5 +5,8 @@ export const authData = {
 
     organizerId: null,
     exposerId: null,
-    visitorId: null
+    visitorId: null,
+
+    themeId : null,
+    expositionId : null
 };

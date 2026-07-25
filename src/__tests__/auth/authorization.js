@@ -2,11 +2,10 @@ import { describe, test, expect } from "vitest";
 import request from "supertest";
 import app from "../../app.js";
 import { USERS } from "../constants.js";
-import { authData } from "../setup/auth.data.js";
+import { authData } from "../shared/auth.data.js";
 
 
 export default function authorizationTests() {
-
     test("Organizer can access organizer route", async () => {
         const res = await request(app)
             .get("/exposition")

@@ -3,7 +3,7 @@ import request from "supertest";
 import app from "../../app.js";
 
 import { USERS } from "../constants.js";
-import { authData } from "../setup/auth.data.js";
+import { authData } from "../shared/auth.data.js";
 
 
 export default function loginTests() {
