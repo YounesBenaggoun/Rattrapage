@@ -52,7 +52,8 @@ describe.sequential("Test Theme Repository", () => {
         const res = await themeRepository.getAll();
         expect(res.length).toBeGreaterThan(0);
     });
-    test("Theme Remove", async () => {
+    
+    test("Theme Delete", async () => {
         const result = await themeRepository.delete(themeId);
         expect(result.id).toBe(themeId);
     });

@@ -21,6 +21,14 @@ Controller.add = async (req, res) => {
         return res.status(500).json({ message: error.message });
     }
 };
+Controller.addExposer = async (req, res) => {
+    try {
+        const result = await expositionAdd.execute(req.body);
+        return res.status(201).json(result);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+};
 
 Controller.getAll = async (req, res) => {
     try {

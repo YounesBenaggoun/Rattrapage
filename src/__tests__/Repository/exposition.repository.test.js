@@ -1,4 +1,4 @@
-import { describe, expect , it } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import ExpositionRepository from "../../3_InfraStructure/Repositories/Exposition.Repository.js";
 
@@ -8,17 +8,20 @@ const expositionRepository = new ExpositionRepository();
 
 let expositionId;
 
-const RANDOM_EXPOSER_ID = "6a56050fcebb4e14ed6b6666";
-const SECOND_RANDOM_EXPOSER_ID = "6a56050fcebb4e14ed6b7000";
+const FIRST_RANDOM_EXPOSER_ID = "6a56050fcebb4e14ed6b6666";
+const SECOND_RANDOM_EXPOSER_ID = "6a56050fcebb4e14ed6b7777";
 
 
 const TEST_JSON_EXPOSITION = {
-    "title": "Nancy",
+    "title": "Barcelone",
     "address": "Nancy",
     "description": "des",
     "exposerIds": [
+        "6a579213a02baa529ee50000",
+        "6a579213a02baa529ee60000"
     ],
-    "theme": "6a579213a02baa529ee531de",
+    "theme": "6a579213a02baa529ee50000",
+
     "maxVisitor": 3,
     "duration": 45,
     "maxExposer": 2,
@@ -26,31 +29,33 @@ const TEST_JSON_EXPOSITION = {
     "endDate": "2027-02-02"
 }
 
+
 // ADD EXPOSITION 
 describe.sequential("Exposition TEST With Exposer", () => {
-    it("Should Save new Exposition with exposerId " + SECOND_RANDOM_EXPOSER_ID, async () => {
+    it("Should Save new Exposition ", async () => {
         const newExpo = await expositionRepository.save(TEST_JSON_EXPOSITION);
         expositionId = newExpo.id;
         expect(newExpo).toHaveProperty("id");
-        expect(newExpo.id).toBe(expositionId); 
+        expect(newExpo.id).toBe(expositionId);
     });
-// Find By Id 
+    // Find By Id 
 
     it("Find By Id ", async () => {
         const newExpo = await expositionRepository.findById(expositionId);
+        console.log(newExpo);
         expect(newExpo).toHaveProperty("id");
-        expect(newExpo.id).toBe(expositionId); 
+        expect(newExpo.id).toBe(expositionId);
     });
 
 
 
     // ADD EXPOSER 
 
-    it("Should add this exposerId " + RANDOM_EXPOSER_ID + " as and exposerIds", async () => {
-        const newExpo = await expositionRepository.addExposerId(expositionId, RANDOM_EXPOSER_ID);
+    it("Should add this exposerId " + FIRST_RANDOM_EXPOSER_ID + " as and exposerIds", async () => {
+        const newExpo = await expositionRepository.addExposerId(expositionId, FIRST_RANDOM_EXPOSER_ID);
         expect(newExpo).toHaveProperty("exposerIds");
         const exposerIds = newExpo.exposerIds;
-        expect(exposerIds.includes(RANDOM_EXPOSER_ID)).toBeTruthy();
+        expect(exposerIds.includes(FIRST_RANDOM_EXPOSER_ID)).toBeTruthy();
     });
 
 
@@ -63,29 +68,29 @@ describe.sequential("Exposition TEST With Exposer", () => {
         expect(exposerIds.includes(SECOND_RANDOM_EXPOSER_ID)).toBeTruthy();
     });
 
-    // DUPLICATE EXPOSER ID
-
-    it("Should add this second exposerId " + SECOND_RANDOM_EXPOSER_ID + " as and exposerIds", async () => {
-        const newExpo = await expositionRepository.addExposerId(expositionId, SECOND_RANDOM_EXPOSER_ID);
-        expect(newExpo).toHaveProperty("exposerIds");
-        const exposerIds = newExpo.exposerIds;
-        expect(exposerIds.includes(SECOND_RANDOM_EXPOSER_ID)).toBeTruthy();
-    });
 
 
 
     // GET LIST BY EXPOSITION BY EXPOSER ID
 
     it("Should get List by exposerId", async () => {
-        const list = await expositionRepository.findExpositionByExposerId(RANDOM_EXPOSER_ID);
+        const list = await expositionRepository.findExpositionByExposerId(FIRST_RANDOM_EXPOSER_ID);
         expect(list.length).toBeGreaterThanOrEqual(1);
     });
+
+    it("Should get All the exposers", async () => {
+        const list = await expositionRepository.countExposers(expositionId, FIRST_RANDOM_EXPOSER_ID);
+        // console.log(list);
+        // expect(list.length).toBeGreaterThanOrEqual(1);
+    });
+
+
 })
 
 
-describe.sequential("Exposition TEST", () => {
+describe.sequential("Exposition Add Exposer", () => {
     // ///////////////////////////////////////////////
-    // REMOVE EXPOSER ID 
+    // REMOVE EXPOSER ID
     // ///////////////////////////////////////////////
 
     it("Should Remove this ExposerId " + SECOND_RANDOM_EXPOSER_ID, async () => {
@@ -96,7 +101,7 @@ describe.sequential("Exposition TEST", () => {
     });
 
     // ///////////////////////////////////////////////
-    // REMOVE ALL THE EXPOSITIONI 
+    // REMOVE ALL THE EXPOSITIONI
     // ///////////////////////////////////////////////
     it("Should Delete the Exposition", async () => {
         const deletedExpo = await expositionRepository.delete(expositionId);

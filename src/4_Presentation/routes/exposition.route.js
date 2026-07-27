@@ -15,6 +15,13 @@ router.post(
     expositionController.add
 );
 
+router.post(
+    "/addExposer",
+    authMiddleware,
+    roleMiddleware(Role.ORGANIZER),
+    expositionController.addExposer
+);
+
 router.get(
     "/",
     authMiddleware,

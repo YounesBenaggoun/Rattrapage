@@ -22,8 +22,6 @@ export default function themeTests() {
         expect(res.body.name).toBe(THEME.name);
         expect(res.body.description).toBe(THEME.description);
         authData.themeId = res.body._id;
-
-        console.log(res.body._id);
     });
 
     // test("Organizer can access User Route and get List Of Users", async () => {

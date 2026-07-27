@@ -9,7 +9,7 @@ import { authData } from "./auth.data.js";
 
 
 afterAll(async () => {
-    await ThemeModel.deleteMany({});
+    // await ThemeModel.deleteMany({});
     await UserModel.findByIdAndDelete(authData.organizerId);
     await UserModel.findByIdAndDelete(authData.exposerId);
     await UserModel.findByIdAndDelete(authData.visitorId);

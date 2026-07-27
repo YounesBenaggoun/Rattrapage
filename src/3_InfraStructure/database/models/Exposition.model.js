@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-const THEMES = ['action', 'horror', 'history'];
 
 const expositionSchema = new mongoose.Schema({
   title: {
@@ -67,8 +66,25 @@ const expositionSchema = new mongoose.Schema({
     },
   },
 },
-  { timestamps: true }
+  {
+    timestamps: true,
+    toJSON: { virtuals: true, transform },
+    toObject: { virtuals: true, transform },
+  }
 );
+function transform(doc, ret) {
+  ret._id = ret._id?.toString();
+
+  if (ret.theme) {
+    ret.theme = ret.theme.toString();
+  }
+
+  if (Array.isArray(ret.exposerIds)) {
+    ret.exposerIds = ret.exposerIds.map(id => id.toString());
+  }
+
+  return ret;
+}
 
 const ExpositionModel = mongoose.model("Exposition", expositionSchema);
 

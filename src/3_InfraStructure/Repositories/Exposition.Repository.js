@@ -6,7 +6,7 @@ class ExpositionRepository extends ExpositionInterface {
     constructor() {
         super();
     }
-    
+
     async delete(id) {
         const deletedExposition = await ExpositionModel.findByIdAndDelete(id);
         return deletedExposition;
@@ -76,8 +76,18 @@ class ExpositionRepository extends ExpositionInterface {
 
     async findById(expositionId) {
         const exposition = await ExpositionModel.findById(expositionId)
-            .populate("theme", "name description");
+            .populate("theme", "name description")
         return exposition
+    }
+    async countExposers(expositionId, exposerId) {
+        const newExposition = await this.findById(expositionId);
+        console.log(newExposition.toObject());
+        const count = newExposition.exposerIds.length;
+        return count;
+    }
+    async isFullOfExposer(expositionId) {
+
+
     }
 }
 
