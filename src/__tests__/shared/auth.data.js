@@ -8,5 +8,7 @@ export const authData = {
     visitorId: null,
 
     themeId : null,
-    expositionId : null
+    expositionId : null,
+    reservationId : null
+
 };

@@ -13,6 +13,7 @@ import loginTests from "./login.js";
 import authorizationTests from "./authorization.js";
 import themeTests from "./theme.js";
 import expositionTest from "./exposition.js";
+import reservationTest from "./reservation.js";
 
 
 
@@ -21,4 +22,5 @@ loginTests();
 authorizationTests();
 themeTests();
 expositionTest();
+reservationTest();
 
