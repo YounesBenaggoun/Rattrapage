@@ -24,19 +24,19 @@ export const USERS = {
     }
 };
 export const THEME = {
-    "name" : "voiture image",
-    "description" : "des photo de voiture et moteurs"
+    "name": "voiture image",
+    "description": "des photo de voiture et moteurs"
 }
 export const EXPOSITION = {
-    "title" : "exposition Test a chatelet",
-    "address" : "4 Rue des Innocents. 75001 Paris. France",
-    "description" : "exposition d'image",
-    "maxVisitor" : 3,
-    "duration" : 60,
-    "maxExposer" : 5,
+    "title": "exposition Test a chatelet",
+    "address": "4 Rue des Innocents. 75001 Paris. France",
+    "description": "exposition d'image",
+    "maxVisitor": 3,
+    "duration": 60,
+    "maxExposer": 1,
     "startDate": "2027-01-01",
-    "endDate" : "2027-02-02",
-    "theme" : null
+    "endDate": "2027-02-02",
+    "theme": null
 
 }
 

@@ -2,6 +2,7 @@ import ExpositionInterface from "../../1_Domain/interface/Exposition.Interface.j
 import ExpositionModel from "../database/models/Exposition.model.js";
 import ReservationModel from "../database/models/Reservation.model.js";
 
+import Exposition from "../../1_Domain/entities/Exposition.js";
 class ExpositionRepository extends ExpositionInterface {
     constructor() {
         super();
@@ -76,12 +77,10 @@ class ExpositionRepository extends ExpositionInterface {
 
     async findById(expositionId) {
         const exposition = await ExpositionModel.findById(expositionId)
-            .populate("theme", "name description")
         return exposition
     }
     async countExposers(expositionId, exposerId) {
         const newExposition = await this.findById(expositionId);
-        console.log(newExposition.toObject());
         const count = newExposition.exposerIds.length;
         return count;
     }

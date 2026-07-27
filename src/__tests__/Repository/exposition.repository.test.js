@@ -20,7 +20,7 @@ const TEST_JSON_EXPOSITION = {
         "6a579213a02baa529ee50000",
         "6a579213a02baa529ee60000"
     ],
-    "theme": "6a579213a02baa529ee50000",
+    "theme": "6a67d4311f387e63d7a34372",
 
     "maxVisitor": 3,
     "duration": 45,
@@ -42,12 +42,12 @@ describe.sequential("Exposition TEST With Exposer", () => {
 
     it("Find By Id ", async () => {
         const newExpo = await expositionRepository.findById(expositionId);
+
+        
         console.log(newExpo);
         expect(newExpo).toHaveProperty("id");
         expect(newExpo.id).toBe(expositionId);
     });
-
-
 
     // ADD EXPOSER 
 
@@ -80,7 +80,6 @@ describe.sequential("Exposition TEST With Exposer", () => {
 
     it("Should get All the exposers", async () => {
         const list = await expositionRepository.countExposers(expositionId, FIRST_RANDOM_EXPOSER_ID);
-        // console.log(list);
         // expect(list.length).toBeGreaterThanOrEqual(1);
     });
 

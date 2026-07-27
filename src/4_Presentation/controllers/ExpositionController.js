@@ -3,13 +3,16 @@ import ExpositionRepository from "../../3_InfraStructure/Repositories/Exposition
 import ExpositionAdd from "../../2_Application/usecases/Exposition/Exposition.Add.usecase.js";
 import ExpositionGetAll from "../../2_Application/usecases/Exposition/Exposition.getAll.usecase.js";
 import ExpositionGetByExposerId from "../../2_Application/usecases/Exposition/Exposition.getByExposerId.usecase.js";
-import Role  from "../../1_Domain/entities/Role.js";
+import ExpositionAddExposer from "../../2_Application/usecases/Exposition/Exposition.AddExposer.usecase.js";
+import Role from "../../1_Domain/entities/Role.js";
 
 const repository = new ExpositionRepository();
 
 const expositionAdd = new ExpositionAdd(repository);
 const useExpositionGetAll = new ExpositionGetAll(repository);
 const useExpositionGetByExposerId = new ExpositionGetByExposerId(repository);
+const useExpositionAddExposer = new ExpositionAddExposer(repository);
+
 
 const Controller = {};
 
@@ -22,11 +25,13 @@ Controller.add = async (req, res) => {
     }
 };
 Controller.addExposer = async (req, res) => {
+    const { expositionId, exposerId } = req.body;
+
     try {
-        const result = await expositionAdd.execute(req.body);
+        const result = await useExpositionAddExposer.execute({ expositionId, exposerId });
         return res.status(201).json(result);
     } catch (error) {
-        return res.status(500).json({ message: error.message });
+        return res.status(error.statusCode || 500).json({ message: error.message });
     }
 };
 

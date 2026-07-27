@@ -1,3 +1,4 @@
+import AppError from "../error/AppError.js";
 class Exposition {
     constructor({
         id,
@@ -10,7 +11,7 @@ class Exposition {
         maxExposer,
         startDate,
         endDate,
-        exposerIds, 
+        exposerIds,
     }) {
         this.id = id;
         this.title = title;
@@ -32,10 +33,14 @@ class Exposition {
         const start = new Date(this.startDate);
         const end = new Date(this.endDate);
         if (start.getTime() >= end.getTime()) {
-            const error = new Error("Start Date est inferieur que End Date")
-            error.statusCode = 400;
-            throw error;
+            throw new AppError("Start Date est inferieur que End Date", 400);
         }
+    }
+    isFullOfExposer() {
+        if (this.exposerIds.length >= this.maxExposer) {
+            return true;
+        }
+        return false;
     }
 }
 export default Exposition;

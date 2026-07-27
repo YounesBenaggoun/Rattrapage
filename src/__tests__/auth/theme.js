@@ -23,35 +23,14 @@ export default function themeTests() {
         expect(res.body.description).toBe(THEME.description);
         authData.themeId = res.body._id;
     });
+    test("Organizer  can DELETE Theme and get 201 status", async () => {
+        const themeId = authData.themeId;
+        const deleteRes = await request(app)
+            .delete(`/theme/${themeId}`)
+            .set("Authorization", `Bearer ${authData.organizerToken}`);
 
-    // test("Organizer can access User Route and get List Of Users", async () => {
-    //     const res = await request(app)
-    //         .get("/User")
-    //         .set("Authorization", `Bearer ${authData.organizerToken}`);
-    //     expect(res.statusCode).toBe(200);
-    //     expect(res.body.length).toBeGreaterThan(0);
-    // });
-
-    // test("Exposer can't access organizer route", async () => {
-    //     const res = await request(app)
-    //         .post("/exposition/add")
-    //         .set("Authorization", `Bearer ${authData.exposerToken}`);
-    //     expect(res.statusCode).toBe(403);
-    // });
-    // test("Exposer can not access User Route", async () => {
-    //     const res = await request(app)
-    //         .get("/User")
-    //         .set("Authorization", `Bearer ${authData.exposerToken}`);
-    //     expect(res.statusCode).toBe(403);
-    //     expect(res.body.length).toBe(undefined);
-    // });
-
-    // test("Visitor can't access organizer route", async () => {
-    //     const res = await request(app)
-    //         .get("/exposition")
-    //         .set("Authorization", `Bearer ${authData.visitorToken}`);
-    //     expect(res.statusCode).toBe(403);
-    // });
-
-
+        expect(deleteRes.statusCode).toBe(200);
+        expect(deleteRes.body.message).toBe("Deleted");
+        expect(deleteRes.body.theme._id).toBe(authData.themeId);
+    });
 }
