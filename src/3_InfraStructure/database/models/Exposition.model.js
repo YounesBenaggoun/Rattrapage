@@ -26,7 +26,7 @@ const expositionSchema = new mongoose.Schema({
     ],
     validate: {
       validator: function (ids) {
-        return ids.length === new Set(ids.map(id => id.toString())).size;
+        return ids.length === new Set(ids.map(id => id?.toString())).size;
       },
       message: "Duplicate exposerIds are not allowed",
     },
@@ -76,11 +76,11 @@ function transform(doc, ret) {
   ret._id = ret._id?.toString();
 
   if (ret.theme) {
-    ret.theme = ret.theme.toString();
+    ret.theme = ret.theme?.toString();
   }
 
   if (Array.isArray(ret.exposerIds)) {
-    ret.exposerIds = ret.exposerIds.map(id => id.toString());
+    ret.exposerIds = ret.exposerIds.map(id => id?.toString());
   }
 
   return ret;

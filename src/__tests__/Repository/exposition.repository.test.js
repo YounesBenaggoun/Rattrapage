@@ -42,9 +42,6 @@ describe.sequential("Exposition TEST With Exposer", () => {
 
     it("Find By Id ", async () => {
         const newExpo = await expositionRepository.findById(expositionId);
-
-        
-        console.log(newExpo);
         expect(newExpo).toHaveProperty("id");
         expect(newExpo.id).toBe(expositionId);
     });

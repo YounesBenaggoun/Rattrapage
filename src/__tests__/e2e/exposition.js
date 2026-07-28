@@ -1,8 +1,9 @@
-import { describe, test, expect } from "vitest";
+import { describe, test, expect, afterAll } from "vitest";
 import request from "supertest";
 import app from "../../app.js";
 import { USERS, EXPOSITION } from "../constants.js";
 import { authData } from "../shared/auth.data.js";
+
 
 
 
@@ -40,8 +41,6 @@ export default function expositionTest() {
             })
             .set("Authorization", `Bearer ${authData.organizerToken}`);
         expect(res.statusCode).toBe(201);
-        console.log(authData.expositionId, authData.exposerId)
-        console.log(res.body);
         expect(res.body._id).toBe(authData.expositionId);
         expect(res.body.exposerIds).toContain(authData.exposerId);
     });
@@ -57,6 +56,8 @@ export default function expositionTest() {
         expect(res.statusCode).toBe(409);
         expect(res.body.message).toBe("Exposition is Full Of Exposer");
     });
+
+
 
 
 
