@@ -39,7 +39,6 @@ Controller.getAll = async (req, res) => {
 
     try {
         let result;
-        console.log(req.user);
         if (req.user.role === Role.EXPOSER) {
             result = await useExpositionGetByExposerId.execute(req.user.id);
         } else {

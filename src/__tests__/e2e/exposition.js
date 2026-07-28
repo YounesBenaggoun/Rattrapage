@@ -4,6 +4,13 @@ import app from "../../app.js";
 import { USERS, EXPOSITION } from "../constants.js";
 import { authData } from "../shared/auth.data.js";
 
+import ExpositionModel from "../../3_InfraStructure/database/models/Exposition.model.js";
+
+
+afterAll(async () => {
+    await ExpositionModel.findByIdAndDelete(authData.expositionId);
+});
+
 
 
 
