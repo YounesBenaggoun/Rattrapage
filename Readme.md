@@ -1,8 +1,7 @@
 
 
----
 
-## Algorithme de scoringq
+## Algorithme de scoring
 
 Chaque exposition reçoit un score.
 
@@ -16,7 +15,10 @@ Chaque exposition reçoit un score.
 | priorité métier         | +20    |
 | proche géographiquement | +15    |
 
-Score maximal : 120 points
+
+
+Score maximal : 
+```120 points```
 
 
 Exemple : 
