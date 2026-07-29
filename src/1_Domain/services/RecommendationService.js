@@ -58,8 +58,6 @@ export default class RecommendationService {
             
         }
 
-
-
         return {
             score,
             distance

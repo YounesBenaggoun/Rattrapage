@@ -14,7 +14,6 @@ const recommendationConfig = {
     bonusNear: 10,
     bonnusNearTrigger : 15,
     bonusLowCrowd: 15
-
 }
 
 export default recommendationConfig;
