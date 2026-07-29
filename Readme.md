@@ -1,239 +1,342 @@
+# 🎨 Rattrapage WEB3 - Plateforme de gestion d'expositions
 
-# Rattrappage Hetic Bachelor 3 
+Backend d'une plateforme permettant la gestion d'expositions, la réservation de visites et la recommandation personnalisée d'expositions pour les visiteurs.
 
-## Algorithme de scoring
+Le projet est développé avec une approche **Clean Architecture** afin de garantir une séparation claire entre la logique métier, les cas d'utilisation et les technologies utilisées.
 
-Chaque exposition reçoit un score.
+---
 
+```
+Capture d'écran au dossier Captures
+```
 
-| Critère                 | Points |
-| ----------------------- | ------ |
-| thème préféré           | +40    |
-| durée compatible        | +20    |
-| faible affluence        | +15    |
-| créneaux disponibles    | +10    |
-| priorité métier         | +20    |
-| proche géographiquement | +15    |
+# 🚀 Fonctionnalités
 
+## 🔐 Authentification et gestion des rôles
 
+Le système permet aux utilisateurs de :
 
-Score maximal : 
-```120 points```
+* Créer un compte
+* Se connecter avec authentification JWT
+* Sécuriser les mots de passe avec bcrypt
+* Gérer les accès selon les rôles
 
+Rôles disponibles :
 
-Exemple : 
+* `ORGANIZER`
+* `EXPOSER`
+* `VISITOR`
 
-```Score =
+---
 
-+40  thème préféré
-+20  durée OK
-+12  distance
-+10  créneaux libres
-+15  faible affluence
-+20  priorité métier
+# 🖼️ Gestion des expositions
 
-Total = 117
+La plateforme permet aux organisateurs de gérer les expositions :
+
+* Création d'expositions
+* Modification des informations
+* Suppression d'expositions
+* Association d'exposants
+* Gestion des thèmes
+* Suivi du nombre de places disponibles
+
+Une exposition contient :
+
+* Un titre
+* Une description
+* Une adresse
+* Un thème
+* Une durée de visite
+* Une capacité maximale de visiteurs
+* Une date de début
+* Une date de fin
+* Des exposants associés
+
+---
+
+# 🎟️ Système de réservation
+
+Les visiteurs peuvent réserver des expositions.
+
+Fonctionnalités :
+
+* Création d'une réservation
+* Vérification des réservations existantes
+* Protection contre les doublons
+* Gestion du statut de réservation
+
+Les statuts possibles :
+
+```text
+
+CONFIRMED = true
+NOT RESERVED = false
 ```
 
 ---
 
-Hello
+# 🤖 Système de recommandation intelligent
 
+Le projet intègre un service de recommandation isolé permettant de proposer les expositions les plus pertinentes pour chaque visiteur.
 
-Users
-│
-├── Roles
-│
-├── Reservations
-│   └── Tickets
-│
-├── VisitorPreferences
-│
-Exhibitions
-│
-├── ExhibitionSlots
-│
-├── Venues
-│
-└── Exhibitors
+Le moteur de recommandation utilise un système de scoring basé sur plusieurs critères :
 
-RecommendationLogs
+* Préférences du visiteur
+* Compatibilité avec le temps disponible
+* Distance
+* Affluence
+* Nombre de places disponibles
+* Priorité commerciale
 
-AuditLogs
+Exemple de calcul :
 
-CREATE TABLE users (
-    id UUID PRIMARY KEY,
-    firstname VARCHAR(100),
-    lastname VARCHAR(100),
-    email VARCHAR(255) UNIQUE NOT NULL,
-    password_hash TEXT NOT NULL,
-    role_id INT NOT NULL,
-    created_at TIMESTAMP DEFAULT NOW(),
-    updated_at TIMESTAMP DEFAULT NOW()
-);
+```text
+Score =
+    Préférence utilisateur
+    + Compatibilité durée
+    - Pénalité distance
+    - Pénalité affluence
+    + Places disponibles
+    + Priorité exposition
+```
 
+Les coefficients du système sont configurables dynamiquement depuis MongoDB.
 
-roles
-VISITOR
-EXHIBITOR
-ORGANIZER
+Exemple de configuration :
 
-
-lieux d'exposition 
-CREATE TABLE venues (
-    id UUID PRIMARY KEY,
-    name VARCHAR(255),
-    address TEXT,
-    max_capacity INT NOT NULL,
-    latitude DECIMAL(10,8),
-    longitude DECIMAL(11,8),
-    created_at TIMESTAMP DEFAULT NOW()
-);
-
-
-exhibitors4
-CREATE TABLE exhibitors (
-    id UUID PRIMARY KEY,
-    user_id UUID UNIQUE NOT NULL,
-    company_name VARCHAR(255),
-    FOREIGN KEY (user_id) REFERENCES users(id)
-);
-
-
-expositions 
-CREATE TABLE exhibitions (
-    id UUID PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    description TEXT,
-    exhibitor_id UUID NOT NULL,
-    venue_id UUID NOT NULL,
-    estimated_duration INT,
-    category VARCHAR(100),
-    created_at TIMESTAMP DEFAULT NOW(),
-
-    FOREIGN KEY (exhibitor_id) REFERENCES exhibitors(id),
-    FOREIGN KEY (venue_id) REFERENCES venues(id)
-);
-
-
-exhibition_slots
-CREATE TABLE exhibition_slots (
-    id UUID PRIMARY KEY,
-    exhibition_id UUID NOT NULL,
-    start_time TIMESTAMP NOT NULL,
-    end_time TIMESTAMP NOT NULL,
-    max_visitors INT NOT NULL,
-    current_bookings INT DEFAULT 0,
-
-    FOREIGN KEY (exhibition_id)
-        REFERENCES exhibitions(id)
-);
-
-
-visitor_preferences
-CREATE TABLE visitor_preferences (
-    id UUID PRIMARY KEY,
-    user_id UUID UNIQUE NOT NULL,
-    preferred_categories TEXT,
-    available_duration INT,
-    mobility_level VARCHAR(50),
-
-    FOREIGN KEY (user_id)
-        REFERENCES users(id)
-);
-
-{
-  "categories": [
-    "Nature",
-    "Portrait"
-  ],
-  "available_duration": 180,
-  "mobility_level": "HIGH"
+```json
+recommendationConfig = {
+    preferenceCoef: 40,
+    distancePinality: 0.05,
+    durationCoef: 20,
+    crowdPinality: 0.4,
+    availableSlotsCoef: 2,
+    businessPriority: {
+        // id de l'exposition 
+        "6a69d00425a3f5b363ba646b": 25,
+        "6a69e0a0c31ff145a61c97e8": 8,
+        "6a69e0d3c31ff145a61c97e9": 11
+    },
+    maxDistance: 40,
+    bonusLowCrowdTrigger: 30,
+    bonusNear: 10,
+    bonnusNearTrigger: 15,
+    bonusLowCrowd: 15
 }
+```
 
+---
 
-Reservations 
-CREATE TABLE reservations (
-    id UUID PRIMARY KEY,
-    user_id UUID NOT NULL,
-    slot_id UUID NOT NULL,
+# 🏗️ Architecture du projet
 
-    status VARCHAR(50) NOT NULL,
+Le projet suit les principes de la **Clean Architecture**.
 
-    created_at TIMESTAMP DEFAULT NOW(),
+Structure :
 
-    FOREIGN KEY (user_id)
-        REFERENCES users(id),
-
-    FOREIGN KEY (slot_id)
-        REFERENCES exhibition_slots(id)
-);
-PENDING
-CONFIRMED
-CANCELLED
-CHECKED_IN
-
-
-
-Tickets 
-CREATE TABLE tickets (
-    id UUID PRIMARY KEY,
-    reservation_id UUID UNIQUE NOT NULL,
-    qr_code TEXT UNIQUE,
-    issued_at TIMESTAMP DEFAULT NOW(),
-
-    FOREIGN KEY (reservation_id)
-        REFERENCES reservations(id)
-);
-
-checkins 
-CREATE TABLE checkins (
-    id UUID PRIMARY KEY,
-    ticket_id UUID NOT NULL,
-    checkin_time TIMESTAMP DEFAULT NOW(),
-    validated_by UUID,
-
-    FOREIGN KEY (ticket_id)
-        REFERENCES tickets(id),
-
-    FOREIGN KEY (validated_by)
-        REFERENCES users(id)
-);
-
-
-
-
-Domain
+```text
+src
 │
-├── User
-├── Role
-├── Venue
-├── Exhibition
-├── Slot
-├── Reservation
-├── Ticket
+├── 1_Domain
+│   ├── entities
+│   ├── interface
+│   ├── error
+│   └── services
 │
+├── 2_Application
+│   └── usecases
+│
+├── 3_Infrastructure
+│   ├── database
+│   ├── repositories
+│   └── models
+│
+└── 4_Presentation
+    ├── controllers
+    ├── routes
+    └── middlewares
+```
 
-Application
-│
-├── RegisterUserUseCase
-├── LoginUseCase
-├── CreateReservationUseCase
-├── GenerateTicketUseCase
-├── RecommendVisitUseCase
-│
 
-Infrastructure
-│
-├── PostgreSQL
-├── JWTService
-├── PasswordHasher
-├── QRCodeService
-│
+# 🛠️ Technologies utilisées
 
-Presentation
-│
-├── AuthController
-├── ReservationController
-├── RecommendationController
-└── ExhibitionController
+## Backend
+
+* Node.js
+* Express.js
+* MongoDB
+* Mongoose
+
+## Sécurité
+
+* JSON Web Token (JWT)
+* bcrypt
+
+## Tests
+
+* Vitest
+
+## Outils de développement
+
+* ESLint
+* Nodemon
+* CommitLint
+
+---
+
+# 📦 Installation
+
+Cloner le projet :
+
+```bash
+git clone https://github.com/younesBenaggoun/rattrapage.git
+
+cd rattrapage
+```
+
+Installer les dépendances :
+
+```bash
+npm install
+```
+
+---
+
+# ⚙️ Configuration environnement
+
+Créer un fichier `.env` :
+
+```env
+PORT=5000
+MONGO_URI = mongodb+srv://Younes:12341234@cluster0.3684pxb.mongodb.net/Rattrapage
+JWT_SECRET = JWT-SECRET
+SALT_ROUNDS = 10
+JWT_EXPIRES_IN = 180d
+
+```
+
+---
+
+# ▶️ Démarrage du projet
+
+Mode développement :
+
+```bash
+npm run dev
+```
+
+Mode production :
+
+```bash
+npm start
+```
+
+---
+
+# 🧪 Tests
+
+Lancer les tests :
+
+```bash
+npm test
+```
+
+
+---
+
+# 📚 Principales routes API
+
+## Authentification
+
+### Inscription utilisateur
+
+```http
+POST /user/register
+```
+
+### Connexion
+
+```http
+POST /user/login
+```
+
+---
+
+## Expositions
+
+### Récupérer les expositions
+
+```http
+GET /exposition
+```
+
+### Créer une exposition
+
+```http
+POST /exposition/add
+```
+
+---
+
+### Associé Exposer à une exposition
+
+```http
+POST /exposition/addExposer
+```
+
+---
+
+## Réservations
+
+### Créer une réservation
+
+```http
+POST /reservation/add
+```
+
+---
+
+## Recommandations
+
+### Obtenir les recommandations
+
+```http
+GET /recommendation
+```
+
+### get les recommandation Config
+```http
+GET /recommendation/config
+```
+
+### update les recommandation Config
+```http
+POST /recommendation/config
+```
+
+---
+
+
+
+# 🎯 Objectifs du projet
+
+Ce projet met en pratique :
+
+* L'architecture Clean Architecture
+* La séparation métier / infrastructure
+* Le pattern Repository
+* Les principes SOLID
+* Les tests unitaires et d'intégration
+* La conception d'un moteur de recommandation configurable
+* La création d'une API REST évolutive
+
+---
+
+# 👨‍💻 Auteur
+
+**Younes Benaggoun**
+
+GitHub :
+
+https://github.com/younesBenaggoun
+
+---

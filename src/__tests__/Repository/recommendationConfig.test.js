@@ -5,7 +5,7 @@ import { describe, expect, afterAll } from "vitest";
 import RecommendationConfig from "../../3_InfraStructure/Repositories/RecommendationConfig.Repository.js";
 import RecommendationConfigModel from "../../3_InfraStructure/database/models/RecommendationConfig.model.js";
 
-const repository = new RecommendationConfig();
+
 
 
 
@@ -14,10 +14,10 @@ const repository = new RecommendationConfig();
 
 
 describe.sequential("Test RecommendationConfigRepository", () => {
+    let repository;
 
     beforeEach(async () => {
-
-
+        repository = new RecommendationConfig();
         await RecommendationConfigModel.deleteMany({});
     });
 
@@ -58,6 +58,7 @@ describe.sequential("Test RecommendationConfigRepository", () => {
         const count = await RecommendationConfigModel.countDocuments();
         expect(count).toBe(1);
     });
+
     it("should update existing config", async () => {
         await RecommendationConfigModel.create({});
 
