@@ -17,7 +17,6 @@ const recommendationConfig = {
 
 }
 
-
 export default recommendationConfig;
 
 
