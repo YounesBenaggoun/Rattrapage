@@ -2,6 +2,7 @@
 export default class RecommendationService {
     constructor(config, distanceService) {
         this.config = config;
+        // console.log("inConfig",this.config);
         this.getDistanceService = distanceService;
     }
     adaptExposition(exposition) {
@@ -35,7 +36,7 @@ export default class RecommendationService {
 
         const businessPriority = this.config.businessPriority[exposition.id];
         score += Number(businessPriority || 0)
-        
+
         //-----------------------------------------
         // Heuristique Crowd , exposition Vide
         //-----------------------------------------
@@ -49,13 +50,13 @@ export default class RecommendationService {
         if (distance < this.config.bonnusNearTrigger) {
             score += this.config.bonusNear;
         }
-         //-----------------------------------------
+        //-----------------------------------------
         // Heuristique Trop loin
         //-----------------------------------------
 
         if (distance > this.config.maxDistance) {
             score = 0;
-            
+
         }
 
         return {

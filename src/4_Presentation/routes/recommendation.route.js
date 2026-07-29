@@ -1,12 +1,12 @@
 import express from "express";
 const router = express.Router();
 
-// import { Role } from "../../1_Domain/entities/Role.js";
+import  Role  from "../../1_Domain/entities/Role.js";
 
 import recommendationController from "../controllers/recommendationController.js";
 
-// import authMiddleware from "../middlewares/auth.Middleware.js";
-// import roleMiddleware from "../middlewares/role.Middleware.js";
+import authMiddleware from "../middlewares/auth.Middleware.js";
+import roleMiddleware from "../middlewares/role.Middleware.js";
 
 router.post(
     "/",
@@ -15,11 +15,15 @@ router.post(
 
 router.get(
     "/config/",
+    authMiddleware,
+    roleMiddleware(Role.ORGANIZER),
     recommendationController.getConfig
 );
 
 router.post(
     "/config/",
+    authMiddleware,
+    roleMiddleware(Role.ORGANIZER),
     recommendationController.updateConfig
 );
 

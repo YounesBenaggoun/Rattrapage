@@ -1,9 +1,9 @@
 
 import RecommendationConfigModel from "../database/models/RecommendationConfig.model.js";
-// import IRecommendationConfigRepository from "../../domain/repositories/IRecommendationConfigRepository.js";
+import IRecommendationConfigRepository from "../../1_Domain/interface/RecommendationConfig.interface.js";
 
 
-export default class RecommendationConfigRepository  {
+export default class RecommendationConfigRepository extends IRecommendationConfigRepository{
 
   async get() {
     let config = await RecommendationConfigModel.findOne().lean();
@@ -22,7 +22,7 @@ export default class RecommendationConfigRepository  {
       { $set: data },
       {
         upsert: true,
-        new: true,
+        returnDocument: "after",
         runValidators: true,
       }
     ).lean();
