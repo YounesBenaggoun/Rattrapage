@@ -26,7 +26,6 @@ async function getCoordinates(address) {
         lon: Number(data[0].lon),
     };
 }
-
 async function calculateDistance(lat1, lon1, lat2, lon2) {
     const R = 6371;
 
@@ -43,8 +42,7 @@ async function calculateDistance(lat1, lon1, lat2, lon2) {
 
     return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
 }
-
-async function getDistanceBetween(address1, address2) {
+async function DistanceService(address1, address2) {
     try {
         const a = await getCoordinates(address1);
         const b = await getCoordinates(address2);
@@ -59,5 +57,4 @@ async function getDistanceBetween(address1, address2) {
     }
 }
 
-
-export default getDistanceBetween;
+export default DistanceService;

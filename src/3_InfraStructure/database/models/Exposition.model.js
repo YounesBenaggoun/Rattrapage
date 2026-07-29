@@ -75,12 +75,14 @@ const expositionSchema = new mongoose.Schema({
 function transform(doc, ret) {
   ret._id = ret._id?.toString();
 
-  if (ret.theme) {
-    ret.theme = ret.theme?.toString();
+  if (ret.theme instanceof mongoose.Types.ObjectId) {
+    ret.theme = ret.theme.toString();
   }
 
   if (Array.isArray(ret.exposerIds)) {
-    ret.exposerIds = ret.exposerIds.map(id => id?.toString());
+    ret.exposerIds = ret.exposerIds.map(id =>
+      id instanceof mongoose.Types.ObjectId ? id.toString() : id
+    );
   }
 
   return ret;
