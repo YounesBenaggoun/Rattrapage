@@ -198,3 +198,36 @@ Presentation
 ├── ReservationController
 ├── RecommendationController
 └── ExhibitionController
+
+---
+
+## Algorithme de scoringq
+
+Chaque exposition reçoit un score.
+
+
+| Critère                 | Points |
+| ----------------------- | ------ |
+| thème préféré           | +40    |
+| durée compatible        | +20    |
+| faible affluence        | +15    |
+| créneaux disponibles    | +10    |
+| priorité métier         | +20    |
+| proche géographiquement | +15    |
+
+Score maximal : 120 points
+
+
+Exemple : 
+
+```Score =
+
++40  thème préféré
++20  durée OK
++12  distance
++10  créneaux libres
++15  faible affluence
++20  priorité métier
+
+Total = 117
+```

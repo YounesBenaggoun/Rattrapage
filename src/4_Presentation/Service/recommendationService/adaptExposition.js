@@ -3,10 +3,11 @@ import getDistanceBetween from "./DistanceService.js";
 let result = {};
 
 const adaptExposition = function (exposition) {
+    console.log(exposition);
     result = {};
-    result.theme = exposition.theme.name;
+    result.theme = exposition.theme?.name;
     result.duration = exposition.duration;
-    result.address =  exposition.address;
+    result.address = exposition.address;
     result.availableSlots = exposition.maxVisitor - exposition.reservationCount;
     result.crowd = exposition.reservationCount;
     result.businessPriority = 0;
