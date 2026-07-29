@@ -13,6 +13,18 @@ router.post(
     recommendationController.getRecommendation
 );
 
+router.get(
+    "/config/",
+    recommendationController.getConfig
+);
+
+router.post(
+    "/config/",
+    recommendationController.updateConfig
+);
+
+
+
 
 
 export default router;

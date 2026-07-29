@@ -29,4 +29,27 @@ Controller.getRecommendation = async (req, res) => {
     }
 }
 
+import RecommendationConfigModel from "../../3_InfraStructure/Repositories/RecommendationConfig.Repository.js";
+
+const recommendConfig = new RecommendationConfigModel();
+Controller.getConfig = async (req, res) => {
+    try {
+        const result = await recommendConfig.get();
+        res.status(200).json(result);
+    } catch (error) {
+        return res.status(error.statusCode || 500).json({ message: error.message });
+    }
+}
+
+Controller.updateConfig = async (req, res) => {
+    try {
+        const result = await recommendConfig.update(req.body);
+        res.status(200).json(result);
+    } catch (error) {
+        return res.status(error.statusCode || 500).json({ message: error.message });
+    }
+}
+
+
+
 export default Controller;
